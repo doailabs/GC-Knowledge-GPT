@@ -15,7 +15,7 @@ function startGCSDKs(clientId) {
       console.log(`environment after addEventListener: ${environment}`);
       console.log(`language after addEventListener: ${language}`);
 
-      const platformClient = require('platformClient');
+      const platformClient = require("purecloud-platform-client-v2");
       const client = platformClient.ApiClient.instance;
 
 
