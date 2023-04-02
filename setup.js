@@ -48,7 +48,7 @@ async function createDataTable() {
 
   const dataTableSchema = {
     "name": "Open AI - Knowledge Integration",
-    "columns": [
+    "columns": {
       "key": {
         "title": "configNumber",
         "type": "string",
@@ -70,12 +70,12 @@ async function createDataTable() {
         "$id": "/properties/SystemPrompt",
         "minLength": 0,
         "maxLength": 36000
-      },	  
+      },    
       "Minimum Answer Confidence": {
         "title": "Minimum Answer Confidence",
         "type": "number",
         "$id": "/properties/MinimumAnswerConfidence",
-        "default": <el valor introducido como default value en la tabla html para el campo Minimum Answer Confidence>,
+        "default": 0.85, // Actualiza esto con el valor por defecto que tienes en la tabla HTML
         "minimum": 0,
         "maximum": 1
       },
@@ -97,7 +97,7 @@ async function createDataTable() {
         "type": "string",
         "$id": "/properties/WrapUpIdsForArticles",
       }  
-    ]
+    }
   };
 
   try {
@@ -107,7 +107,6 @@ async function createDataTable() {
     console.error('Error al crear la DataTable:', error);
   }
 }
-
 
 async function insertConfigurationRow(dataTableId, configNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds) {
   const newRow = {
