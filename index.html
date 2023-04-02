@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact List Management</title>
+  <title>Genesys Cloud Knowledge & Open AI Integration</title>
   <script src="https://sdk-cdn.mypurecloud.com/javascript/latest/purecloud-platform-client-v2.min.js"></script>
   <script src="https://sdk-cdn.mypurecloud.com/client-apps/2.6.3/purecloud-client-app-sdk-de77761d.min.js"></script>
   <script src="startGCSDKs.js"></script>
@@ -12,46 +12,47 @@
 </head>
 
 <body>
-  <h1>Contact List Management</h1>
-  <button id="showContactLists">Mostrar contact lists</button>
-  <div id="contactLists">
-    <!-- Aquí se mostrarán las contact lists -->
+  <h1>Genesys Cloud Knowledge & Open AI Integration</h1>
+  <h2>Setup</h2>
+  <div id="knowledgeBaseSection">
+    <h3>Knowledge base</h3>
+    <button id="getKnowledgeBasesBtn">Get Knowledge Bases</button>
+    <table id="knowledgeBasesTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="knowledgeBasesTableBody">
+        <!-- Aquí se mostrarán las knowledge bases -->
+      </tbody>
+    </table>
   </div>
 
-  <div id="loadingScreen" style="display:none;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Cargando registros de la contact list</h5>
-        </div>
-        <div class="modal-body">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Cargando...</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <table id="contactListsTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Fecha de creación</th>
-        <th>División</th>
-        <th></th>
-        <!-- Columna vacía para radio buttons -->
-      </tr>
-    </thead>
-    <tbody id="contactListsTableBody">
-      <!-- Aquí se mostrarán las listas de contactos -->
-    </tbody>
-  </table>
-
-  <div id="paginationButtons">
-    <button id="previousPageBtn" disabled>Anterior</button>
-    <button id="nextPageBtn" disabled>Siguiente</button>
+  <div id="configurationSection">
+    <h3>Configuration</h3>
+    <label for="languageSelect">Language:</label>
+    <select id="languageSelect">
+      <option value="en-US">en-US</option>
+      <option value="es-ES">es-ES</option>
+    </select>
+    <br>
+    <label for="knowledgeBaseId">Knowledge Base Id:</label>
+    <input type="text" id="knowledgeBaseId" readonly>
+    <br>
+    <label for="minConfidence">Minimum answer confidence:</label>
+    <input type="number" id="minConfidence" step="0.1" min="0" max="1">
+    <br>
+    <label for="systemPrompt">System prompt:</label>
+    <input type="text" id="systemPrompt">
+    <br>
+    <label for="noMatchBehavior">No match behavior:</label>
+    <select id="noMatchBehavior">
+      <option value="routeToAgent">Route to agent</option>
+      <option value="keepBotLoop">Keep the bot loop</option>
+    </select>
   </div>
 
   <script>
