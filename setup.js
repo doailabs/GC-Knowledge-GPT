@@ -56,7 +56,7 @@ async function createDataTable() {
       "additionalProperties":false,
       "properties":{  
         "key": {
-          "title": "configNumber",
+          "title": "Configuration number",
           "type": "string",
           "$id": "/properties/key",
           "displayOrder": 0,
