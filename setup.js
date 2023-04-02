@@ -48,7 +48,7 @@ async function createDataTable() {
   const dataTableSchema = {  
    "$schema":"http://json-schema.org/draft-04/schema#",
    "additionalProperties":false,
-   "name":"test table",
+   "name":"Open AI - Knowledge Integration",
    "type":"object",
    "schema":{
       "$schema":"http://json-schema.org/draft-04/schema#",
