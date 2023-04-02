@@ -56,18 +56,11 @@ async function createDataTable() {
       "additionalProperties":false,
       "properties":{  
         "key": {
-          "title": "Configuration number",
+          "title": "Knowledge Base ID",
           "type": "string",
           "$id": "/properties/key",
           "displayOrder": 0,
           "minLength": 1,
-          "maxLength": 256
-        },
-        "Knowledge Base ID": {
-          "title": "Knowledge Base ID",
-          "type": "string",
-          "$id": "/properties/KnowledgeBaseID",
-          "minLength": 0,
           "maxLength": 36
         },
         "System Prompt": {
@@ -102,7 +95,27 @@ async function createDataTable() {
           "title": "Wrap up ids for knowledge articles",
           "type": "string",
           "$id": "/properties/WrapUpIdsForArticles"
-        }  
+        },
+        "Model": {
+          "title": "Model",
+          "type": "string",
+          "$id": "/properties/Model",
+          "default": "gpt-3.5-turbo"
+        },
+        "Temperature": {
+          "title": "Temperature",
+          "type": "number",
+          "$id": "/properties/Temperature",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "MaxTokens": {
+          "title": "Max Tokens",
+          "type": "integer",
+          "$id": "/properties/MaxTokens",
+          "default": 512
+        }        
       },
       "required":[
          "key"
@@ -118,16 +131,18 @@ async function createDataTable() {
   }
 }
 
-async function insertConfigurationRow(dataTableId, configNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds) {
+async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens) {
   const newRow = {
-    "Configuration Number": configNumber,
     "Knowledge Base Id": knowledgeBaseId,
     "System prompt": systemPrompt,
     "Language": language,
     "Minimum answer confidence": minAnswerConfidence,
     "No match behavior": noMatchBehavior,
     "Create knowledge articles based on wrap ups": createKnowledgeArticles,
-    "Wrap up ids for knowledge articles": wrapUpIds
+    "Wrap up ids for knowledge articles": wrapUpIds,
+    "Model": model,
+    "Temperature": temperature,
+    "Max Tokens": maxTokens    
   };
 
   const rowData = {
@@ -191,6 +206,9 @@ async function handleSaveConfigurationButtonClick() {
   const noMatchBehavior = document.getElementById('noMatchBehavior').value;
   const createKnowledgeArticles = document.getElementById('createKnowledgeArticles').checked;
   const wrapUpIds = document.getElementById('wrapUpIds').value;
+  const model = document.getElementById('model').value;
+  const temperature = document.getElementById('temperature').value;
+  const maxTokens = document.getElementById('maxTokens').value;  
 
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior) {
     alert('Please fill in all required fields.');
@@ -205,7 +223,7 @@ async function handleSaveConfigurationButtonClick() {
 
   const newConfigNumber = await getNextConfigurationNumber(dataTableId);
 
-  await insertConfigurationRow(dataTableId, newConfigNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds);
+  await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
 
   alert('Configuration saved.');
 
