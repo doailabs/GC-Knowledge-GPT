@@ -215,5 +215,3 @@ function registerEventHandlers() {
   saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
 }
 
-
-dime si el código cumple los requisitos descritos para el campo "No match behavior"
