@@ -75,7 +75,7 @@ async function createDataTable() {
         "title": "Minimum Answer Confidence",
         "type": "number",
         "$id": "/properties/MinimumAnswerConfidence",
-        "default": 0.85, // Actualiza esto con el valor por defecto que tienes en la tabla HTML
+        "default": 0.85,
         "minimum": 0,
         "maximum": 1
       },
