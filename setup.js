@@ -210,7 +210,8 @@ async function handleSaveConfigurationButtonClick() {
   const temperature = document.getElementById('temperature').value;
   const maxTokens = document.getElementById('maxTokens').value;  
 
-  if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior) {
+  // Compruebe si todos los campos están llenos
+  if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
     alert('Please fill in all required fields.');
     return;
   }
