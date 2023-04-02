@@ -58,8 +58,10 @@
 
   <script>
     const clientId = '479255ae-cf23-4c2e-9209-555370df882c';
-
     startGCSDKs(clientId);
+    document.addEventListener('DOMContentLoaded', () => {
+      registerEventHandlers();
+    });
   </script>
 </body>
 
