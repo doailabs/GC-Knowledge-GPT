@@ -40,14 +40,17 @@
       <option value="es-ES">es-ES</option>
     </select>
     <br>
+    <!-- Campo Knowledge Base Id -->
     <label for="knowledgeBaseId">Knowledge Base Id:</label>
-    <input type="text" id="knowledgeBaseId" readonly>
-    <br>
-    <label for="minConfidence">Minimum answer confidence:</label>
-    <input type="number" id="minConfidence" step="0.1" min="0" max="1">
-    <br>
+    <input type="text" id="knowledgeBaseId" size="36">
+
+    <!-- Campo Minimum answer confidence -->
+    <label for="minAnswerConfidence">Minimum answer confidence:</label>
+    <input type="number" id="minAnswerConfidence" step="0.1" min="0" max="1" size="3">
+
+    <!-- Campo System prompt -->
     <label for="systemPrompt">System prompt:</label>
-    <input type="text" id="systemPrompt">
+    <input type="text" id="systemPrompt" onInput="adjustInputSize(this, 200)" size="200">
     <br>
     <label for="noMatchBehavior">No match behavior:</label>
     <select id="noMatchBehavior">
