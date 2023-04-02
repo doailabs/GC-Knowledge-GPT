@@ -93,13 +93,13 @@ async function createDataTable() {
           "maxLength": 36000
         },
         "Create knowledge articles based on wrap ups": {
-          "name": "Create knowledge articles based on wrap ups",
+          "title": "Create knowledge articles based on wrap ups",
           "type": "boolean",
           "$id": "/properties/CreateKnowledgeArticles",
           "default": false
         },
         "Wrap up ids for knowledge articles": {
-          "name": "Wrap up ids for knowledge articles",
+          "title": "Wrap up ids for knowledge articles",
           "type": "string",
           "$id": "/properties/WrapUpIdsForArticles"
         }  
