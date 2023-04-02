@@ -217,7 +217,7 @@ async function handleSaveConfigurationButtonClick() {
 
   // Compruebe si todos los campos están llenos
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
-    alert('Please fill in all required fields.');
+    alert('Please fill in all the configuration fields.');
     return;
   }
 
