@@ -101,12 +101,13 @@ async function createDataTable() {
         "Wrap up ids for knowledge articles": {
           "name": "Wrap up ids for knowledge articles",
           "type": "string",
-          "$id": "/properties/WrapUpIdsForArticles",
+          "$id": "/properties/WrapUpIdsForArticles"
         }  
       },
       "required":[
          "key"
       ]
+   }
   };
 
   try {
