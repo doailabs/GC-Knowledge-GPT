@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Genesys Cloud Knowledge & Open AI Integration</title>
+  <title>Genesys Cloud Knowledge & Open AI integration</title>
   <script src="https://sdk-cdn.mypurecloud.com/javascript/latest/purecloud-platform-client-v2.min.js"></script>
   <script src="https://sdk-cdn.mypurecloud.com/client-apps/2.6.3/purecloud-client-app-sdk-de77761d.min.js"></script>
   <script src="startGCSDKs.js"></script>
@@ -13,9 +13,11 @@
 </head>
 
 <body>
-  <h1>Genesys Cloud Knowledge & Open AI Integration</h1>
+  <h1>Genesys Cloud Knowledge & Open AI integration</h1>
   <h2>Setup</h2>
-  <div id="knowledgeBaseSection">
+
+  <!-- Subapartado Knowledge base -->
+  <div>
     <h3>Knowledge base</h3>
     <button id="getKnowledgeBasesBtn">Get Knowledge Bases</button>
     <table id="knowledgeBasesTable">
@@ -23,40 +25,54 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th></th>
+          <th></th> <!-- Columna vacía para radio buttons -->
         </tr>
       </thead>
       <tbody id="knowledgeBasesTableBody">
-        <!-- Aquí se mostrarán las knowledge bases -->
+        <!-- Aquí se mostrarán las Knowledge Bases -->
       </tbody>
     </table>
   </div>
 
-  <div id="configurationSection">
+  <!-- Subapartado Configuration -->
+  <div>
     <h3>Configuration</h3>
-    <label for="languageSelect">Language:</label>
-    <select id="languageSelect">
-      <option value="en-US">en-US</option>
-      <option value="es-ES">es-ES</option>
-    </select>
-    <br>
+
+    <!-- Campo Language -->
+    <div>
+      <label for="language">Language:</label>
+      <select id="language">
+        <option value="en-US">en-US</option>
+        <option value="es-ES">es-ES</option>
+      </select>
+    </div>
+
     <!-- Campo Knowledge Base Id -->
-    <label for="knowledgeBaseId">Knowledge Base Id:</label>
-    <input type="text" id="knowledgeBaseId" size="36">
+    <div>
+      <label for="knowledgeBaseId">Knowledge Base Id:</label>
+      <input type="text" id="knowledgeBaseId" size="36">
+    </div>
 
     <!-- Campo Minimum answer confidence -->
-    <label for="minAnswerConfidence">Minimum answer confidence:</label>
-    <input type="number" id="minAnswerConfidence" step="0.1" min="0" max="1" size="3">
+    <div>
+      <label for="minAnswerConfidence">Minimum answer confidence:</label>
+      <input type="number" id="minAnswerConfidence" step="0.1" min="0" max="1" size="3" value="0.85">
+    </div>
 
     <!-- Campo System prompt -->
-    <label for="systemPrompt">System prompt:</label>
-    <input type="text" id="systemPrompt" onInput="adjustInputSize(this, 200)" size="200">
-    <br>
-    <label for="noMatchBehavior">No match behavior:</label>
-    <select id="noMatchBehavior">
-      <option value="routeToAgent">Route to agent</option>
-      <option value="keepBotLoop">Keep the bot loop</option>
-    </select>
+    <div>
+      <label for="systemPrompt">System prompt:</label>
+      <input type="text" id="systemPrompt" onInput="adjustInputSize(this, 200)" size="200">
+    </div>
+
+    <!-- Campo No match behavior -->
+    <div>
+      <label for="noMatchBehavior">No match behavior:</label>
+      <select id="noMatchBehavior">
+        <option value="routeToAgent">Route to agent</option>
+        <option value="keepBotLoop">Keep the bot loop</option>
+      </select>
+    </div>
   </div>
 
   <script>
@@ -64,7 +80,7 @@
     startGCSDKs(clientId).then(() => {
       registerEventHandlers();
     });
-    <!-- Hace los textbox más grandes si el usuario mete más caracteres de los que caben inicialmente -->
+
     function adjustInputSize(input, maxSize) {
       if (input.value.length > maxSize) {
         input.size = input.value.length;
