@@ -64,6 +64,14 @@
     startGCSDKs(clientId).then(() => {
       registerEventHandlers();
     });
+    <!-- Hace los textbox más grandes si el usuario mete más caracteres de los que caben inicialmente -->
+    function adjustInputSize(input, maxSize) {
+      if (input.value.length > maxSize) {
+        input.size = input.value.length;
+      } else {
+        input.size = maxSize;
+      }
+    }
   </script>
 </body>
 
