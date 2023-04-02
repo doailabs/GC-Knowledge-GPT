@@ -85,7 +85,18 @@ async function createDataTable() {
         "$id": "/properties/NoMatchBehavior",
         "minLength": 0,
         "maxLength": 36000
-      }
+      },
+      "Create knowledge articles based on wrap ups": {
+        "name": "Create knowledge articles based on wrap ups",
+        "type": "boolean",
+        "$id": "/properties/CreateKnowledgeArticles",
+        "default": false
+      },
+      "Wrap up ids for knowledge articles": {
+        "name": "Wrap up ids for knowledge articles",
+        "type": "string",
+        "$id": "/properties/WrapUpIdsForArticles",
+      }  
     ]
   };
 
@@ -98,24 +109,24 @@ async function createDataTable() {
 }
 
 
-async function insertConfigurationRow(dataTableId, configNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior) {
-  const apiInstance = new platformClient.FlowApi();
-
+async function insertConfigurationRow(dataTableId, configNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds) {
   const newRow = {
-    "Config Number": configNumber,
-    "Knowledge Base ID": knowledgeBaseId,
-    "System Prompt": systemPrompt,
+    "Configuration Number": configNumber,
+    "Knowledge Base Id": knowledgeBaseId,
+    "System prompt": systemPrompt,
     "Language": language,
-    "Minimum Answer Confidence": minAnswerConfidence,
-    "No Match Behavior": noMatchBehavior
+    "Minimum answer confidence": minAnswerConfidence,
+    "No match behavior": noMatchBehavior,
+    "Create knowledge articles based on wrap ups": createKnowledgeArticles,
+    "Wrap up ids for knowledge articles": wrapUpIds
   };
 
-  try {
-    const response = await apiInstance.postFlowsDatatablesRows(dataTableId, newRow);
-    return response;
-  } catch (error) {
-    console.error('Error al insertar la fila en la DataTable:', error);
-  }
+  const rowData = {
+    "action": "append",
+    "data": [newRow]
+  };
+
+  await createRow(dataTableId, rowData);
 }
 
 
@@ -167,43 +178,35 @@ async function handleSaveConfigurationButtonClick() {
   const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
   const language = document.getElementById('language').value;
-  const minAnswerConfidence = parseFloat(document.getElementById('minAnswerConfidence').value);
+  const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
   const noMatchBehavior = document.getElementById('noMatchBehavior').value;
+  const createKnowledgeArticles = document.getElementById('createKnowledgeArticles').checked;
+  const wrapUpIds = document.getElementById('wrapUpIds').value;
 
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior) {
-    let missingFields = [];
-
-    if (!knowledgeBaseId) missingFields.push('Knowledge Base ID');
-    if (!systemPrompt) missingFields.push('System Prompt');
-    if (!language) missingFields.push('Language');
-    if (!minAnswerConfidence) missingFields.push('Minimum Answer Confidence');
-    if (!noMatchBehavior) missingFields.push('No match behavior');
-
-    alert('All fields must be filled: ' + missingFields.join(', '));
+    alert('Please fill in all required fields.');
     return;
   }
 
-  const existingDataTable = await findDataTable('Open AI - Knowledge Integration');
-  let dataTableId = null;
-  let maxConfigNumber = 0;
+  const dataTableId = await getConfigurationDataTableId();
 
-  if (existingDataTable) {
-    dataTableId = existingDataTable.id;
-    const rows = await getDataTableRows(dataTableId);
-    rows.forEach(row => {
-      if (row.configNumber > maxConfigNumber) {
-        maxConfigNumber = row.configNumber;
-      }
-    });
-  } else {
-    const createdDataTable = await createDataTable();
-    dataTableId = createdDataTable.id;
+  if (!dataTableId) {
+    await createConfigurationDataTable();
   }
 
-  const newConfigNumber = maxConfigNumber + 1;
-  await insertConfigurationRow(dataTableId, newConfigNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior);
+  const newConfigNumber = await getNextConfigurationNumber(dataTableId);
 
-  alert('Configuration saved successfully.');
+  await insertConfigurationRow(dataTableId, newConfigNumber, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds);
+
+  alert('Configuration saved.');
+
+  // Clear input fields
+  document.getElementById('knowledgeBaseId').value = '';
+  document.getElementById('systemPrompt').value = '';
+  document.getElementById('minAnswerConfidence').value = 0.85;
+  document.getElementById('createKnowledgeArticles').checked = false;
+  document.getElementById('wrapUpIds').value = '';
+  toggleWrapUpIdsField(); // Hide the Wrap up ids field
 }
 
 
