@@ -1,4 +1,5 @@
-const platformClient = require('platformClient');
+const platformClient = require("purecloud-platform-client-v2");
+const client = platformClient.ApiClient.instance;
 
 // API Calls
 async function getKnowledgeBases() {
@@ -13,7 +14,6 @@ async function getKnowledgeBases() {
 }
 
 async function findDataTableAndMaxConfigNumber() {
-  const platformClient = require('platformClient');
   const apiInstance = new platformClient.FlowApi();
 
   try {
