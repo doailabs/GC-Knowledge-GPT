@@ -15,8 +15,9 @@ function startGCSDKs(clientId) {
       console.log(`environment after addEventListener: ${environment}`);
       console.log(`language after addEventListener: ${language}`);
 
-      const platformClient = require('platformClient');
+      const platformClient = window.purecloud.platform.ClientSdk;
       const client = platformClient.ApiClient.instance;
+
       document.addEventListener('DOMContentLoaded', function () {
         var ClientApp = window.purecloud.apps.ClientApp;
         var myClientApp = new ClientApp({
@@ -44,7 +45,7 @@ function startGCSDKs(clientId) {
 
           myClientApp.alerting.showToastPopup(
             `Hola ${userDetails.name}`,
-            'Bienvenido a contact list management');
+            'Welcome to Genesys Cloud & Open AI Integration');
         })
         .then(() => {
           document.addEventListener('DOMContentLoaded', () => {
