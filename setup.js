@@ -45,59 +45,68 @@ async function findDataTableAndMaxConfigNumber() {
 
 async function createDataTable() {
   const apiInstance = new platformClient.FlowApi();
-
-  const dataTableSchema = {
-    "name": "Open AI - Knowledge Integration",
-    "columns": {
-      "key": {
-        "title": "configNumber",
-        "type": "string",
-        "$id": "/properties/key",
-        "displayOrder": 0,
-        "minLength": 1,
-        "maxLength": 256
+  const dataTableSchema = {  
+   "$schema":"http://json-schema.org/draft-04/schema#",
+   "additionalProperties":false,
+   "name":"test table",
+   "type":"object",
+   "schema":{
+      "$schema":"http://json-schema.org/draft-04/schema#",
+      "type":"object",
+      "additionalProperties":false,
+      "properties":{  
+        "key": {
+          "title": "configNumber",
+          "type": "string",
+          "$id": "/properties/key",
+          "displayOrder": 0,
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "Knowledge Base ID": {
+          "title": "Knowledge Base ID",
+          "type": "string",
+          "$id": "/properties/KnowledgeBaseID",
+          "minLength": 0,
+          "maxLength": 36
+        },
+        "System Prompt": {
+          "title": "System Prompt",
+          "type": "string",
+          "$id": "/properties/SystemPrompt",
+          "minLength": 0,
+          "maxLength": 36000
+        },    
+        "Minimum Answer Confidence": {
+          "title": "Minimum Answer Confidence",
+          "type": "number",
+          "$id": "/properties/MinimumAnswerConfidence",
+          "default": 0.85,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "No Match Behavior": {
+          "title": "No Match Behavior",
+          "type": "string",
+          "$id": "/properties/NoMatchBehavior",
+          "minLength": 0,
+          "maxLength": 36000
+        },
+        "Create knowledge articles based on wrap ups": {
+          "name": "Create knowledge articles based on wrap ups",
+          "type": "boolean",
+          "$id": "/properties/CreateKnowledgeArticles",
+          "default": false
+        },
+        "Wrap up ids for knowledge articles": {
+          "name": "Wrap up ids for knowledge articles",
+          "type": "string",
+          "$id": "/properties/WrapUpIdsForArticles",
+        }  
       },
-      "Knowledge Base ID": {
-        "title": "Knowledge Base ID",
-        "type": "string",
-        "$id": "/properties/KnowledgeBaseID",
-        "minLength": 0,
-        "maxLength": 36
-      },
-      "System Prompt": {
-        "title": "System Prompt",
-        "type": "string",
-        "$id": "/properties/SystemPrompt",
-        "minLength": 0,
-        "maxLength": 36000
-      },    
-      "Minimum Answer Confidence": {
-        "title": "Minimum Answer Confidence",
-        "type": "number",
-        "$id": "/properties/MinimumAnswerConfidence",
-        "default": 0.85,
-        "minimum": 0,
-        "maximum": 1
-      },
-      "No Match Behavior": {
-        "title": "No Match Behavior",
-        "type": "string",
-        "$id": "/properties/NoMatchBehavior",
-        "minLength": 0,
-        "maxLength": 36000
-      },
-      "Create knowledge articles based on wrap ups": {
-        "name": "Create knowledge articles based on wrap ups",
-        "type": "boolean",
-        "$id": "/properties/CreateKnowledgeArticles",
-        "default": false
-      },
-      "Wrap up ids for knowledge articles": {
-        "name": "Wrap up ids for knowledge articles",
-        "type": "string",
-        "$id": "/properties/WrapUpIdsForArticles",
-      }  
-    }
+      "required":[
+         "key"
+      ]
   };
 
   try {
