@@ -72,7 +72,20 @@
         <option value="routeToAgent">Route to agent</option>
         <option value="keepBotLoop">Keep the bot loop</option>
       </select>
+    </div>   
+    
+    <!-- Campo Create knowledge articles based on wrap ups -->
+    <div>
+      <label for="createKnowledgeArticles">Create knowledge articles based on wrap ups:</label>
+      <input type="checkbox" id="createKnowledgeArticles" onchange="toggleWrapUpIdsField()">
     </div>
+
+    <!-- Campo Wrap up ids for knowledge articles (separated by ;) -->
+    <div id="wrapUpIdsField" style="display:none;">
+      <label for="wrapUpIds">Wrap up ids for knowledge articles (separated by ;):</label>
+      <input type="text" id="wrapUpIds">
+    </div>
+
 
     <!-- Botón Save configuration -->
     <div>
@@ -93,6 +106,18 @@
         input.size = maxSize;
       }
     }
+    
+    function toggleWrapUpIdsField() {
+      const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+      const wrapUpIdsField = document.getElementById('wrapUpIdsField');
+
+      if (createKnowledgeArticlesCheckbox.checked) {
+        wrapUpIdsField.style.display = 'block';
+      } else {
+        wrapUpIdsField.style.display = 'none';
+      }
+    }
+    
   </script>
 </body>
 
