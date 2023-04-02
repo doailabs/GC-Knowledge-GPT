@@ -1,5 +1,3 @@
-este es mi fichero setup.js completo:
-
 const platformClient = require('platformClient');
 
 // API Calls
