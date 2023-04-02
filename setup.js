@@ -1,4 +1,6 @@
-const platformClient = require("purecloud-platform-client-v2");
+//const platformClient = require("purecloud-platform-client-v2");
+//const client = platformClient.ApiClient.instance;
+const platformClient = require('platformClient');
 const client = platformClient.ApiClient.instance;
 
 // API Calls
