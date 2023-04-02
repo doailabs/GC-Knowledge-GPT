@@ -198,6 +198,11 @@ function handleKnowledgeBaseSelection(event) {
   updateKnowledgeBaseId(event.target.value);
 }
 
+async function getConfigurationDataTableId() {
+  const { dataTableId } = await findDataTableAndMaxConfigNumber();
+  return dataTableId;
+}
+
 async function handleSaveConfigurationButtonClick() {
   const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
