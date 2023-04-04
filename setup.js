@@ -323,6 +323,45 @@ function displayNewConfiguration() {
   // Limpia los campos de "New configuration"
 }
 
+async function findOpenAiIntegrationDatatable() {
+  try {
+    const response = await genesysCloud.api.getFlowsDatatables({ pageSize: 100 });
+    const datatable = response.entities.find(dt => dt.name === 'Open AI - Knowledge Integration');
+    return datatable || null;
+  } catch (error) {
+    console.error('Error al buscar la datatable "Open AI - Knowledge Integration":', error);
+    return null;
+  }
+}
+
+async function findDatatableRow(datatableId, knowledgeBaseId) {
+  try {
+    const response = await genesysCloud.api.getFlowsDatatableRows(datatableId, { showbrief: false });
+    const datatableRow = response.entities.find(row => row.key === knowledgeBaseId);
+    return datatableRow || null;
+  } catch (error) {
+    console.error(`Error al buscar la fila con key "${knowledgeBaseId}" en la datatable:`, error);
+    return null;
+  }
+}
+
+async function updateConfiguration(datatableId, rowId, updatedRowData) {
+  try {
+    await genesysCloud.api.putFlowsDatatableRow(datatableId, rowId, updatedRowData);
+    console.log('Configuración actualizada con éxito.');
+  } catch (error) {
+    console.error('Error al actualizar la configuración en la datatable:', error);
+  }
+}
+
+async function saveNewConfiguration(datatableId, newRowData) {
+  try {
+    await genesysCloud.api.postFlowsDatatableRows(datatableId, newRowData);
+    console.log('Nueva configuración guardada con éxito.');
+  } catch (error) {
+    console.error('Error al guardar la nueva configuración en la datatable:', error);
+  }
+}
 
 // Initialize
 function init() {
