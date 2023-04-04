@@ -16,7 +16,7 @@ async function getKnowledgeBases() {
 }
 
 async function findDataTableAndMaxConfigNumber() {
-  const apiInstance = new platformClient.FlowApi();
+  let apiInstance = new platformClient.ArchitectApi();
 
   try {
     const response = await apiInstance.getFlowsDatatables();
@@ -46,7 +46,7 @@ async function findDataTableAndMaxConfigNumber() {
 }
 
 async function createDataTable() {
-  const apiInstance = new platformClient.FlowApi();
+  let apiInstance = new platformClient.ArchitectApi();
   const dataTableSchema = {  
    "$schema":"http://json-schema.org/draft-04/schema#",
    "additionalProperties":false,
