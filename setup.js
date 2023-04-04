@@ -210,7 +210,7 @@ async function handleKnowledgeBaseSelection(event) {
   const selectedKnowledgeBaseId = event.target.value;
 
   // Buscar la datatable con nombre "Open AI - Knowledge Integration"
-  const dataTableId = await findDataTable('Open AI - Knowledge Integration');
+  const dataTableId = await findDataTable();
 
   if (dataTableId) {
     // Buscar la fila con el campo clave (key) igual al knowledge base Id seleccionado por el usuario
@@ -287,11 +287,19 @@ async function handleSaveConfigurationButtonClick() {
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
+  const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
 
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
   saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
   document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
+  knowledgeBasesTableBody.addEventListener('change', async (event) => {
+    if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
+      const knowledgeBaseId = event.target.value;
+      await displayConfiguration(knowledgeBaseId);
+    }
+  });
 }
+
 
 function toggleWrapUpIdsField() {
   const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
@@ -302,15 +310,6 @@ function toggleWrapUpIdsField() {
   } else {
     wrapUpIdsFieldWrapper.style.display = 'none';
   }
-  
-  const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
-  knowledgeBasesTableBody.addEventListener('change', async (event) => {
-    if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
-      const knowledgeBaseId = event.target.value;
-      await displayConfiguration(knowledgeBaseId);
-    }
-  });
-  
 }
 
 function registerToggleWrapUpIdsFieldHandler() {
@@ -333,13 +332,21 @@ async function displayConfiguration(knowledgeBaseId) {
   }
 }
 
-
 function displayCurrentConfiguration(datatableRow) {
   // Muestra el subapartado "Current configuration" y oculta "New configuration"
   document.getElementById('currentConfiguration').style.display = 'block';
   document.getElementById('newConfiguration').style.display = 'none';
 
   // Rellena los campos de "Current configuration" con los valores de la fila de la datatable
+  document.getElementById('systemPrompt').value = datatableRow['System Prompt'];
+  document.getElementById('language').value = datatableRow['Language'];
+  document.getElementById('minAnswerConfidence').value = datatableRow['Minimum Answer Confidence'];
+  document.getElementById('noMatchBehavior').value = datatableRow['No Match Behavior'];
+  document.getElementById('createKnowledgeArticles').checked = datatableRow['Create knowledge articles based on wrap ups'];
+  document.getElementById('wrapUpIds').value = datatableRow['Wrap up ids for knowledge articles'];
+  document.getElementById('model').value = datatableRow['Model'];
+  document.getElementById('temperature').value = datatableRow['Temperature'];
+  document.getElementById('maxTokens').value = datatableRow['Max Tokens'];
 }
 
 function displayNewConfiguration() {
@@ -348,6 +355,15 @@ function displayNewConfiguration() {
   document.getElementById('newConfiguration').style.display = 'block';
 
   // Limpia los campos de "New configuration"
+  document.getElementById('systemPrompt').value = '';
+  document.getElementById('language').value = '';
+  document.getElementById('minAnswerConfidence').value = '';
+  document.getElementById('noMatchBehavior').value = '';
+  document.getElementById('createKnowledgeArticles').checked = false;
+  document.getElementById('wrapUpIds').value = '';
+  document.getElementById('model').value = '';
+  document.getElementById('temperature').value = '';
+  document.getElementById('maxTokens').value = '';
 }
 
 async function findDatatableRow(datatableId, knowledgeBaseId) {
