@@ -241,8 +241,6 @@ async function handleSaveConfigurationButtonClick() {
 
   let dataTableId = await getConfigurationDataTableId();
   
-  console.log
-
   if (!dataTableId) {
     const createdDataTable = await createConfigurationDataTable();
     dataTableId = createdDataTable.id;
