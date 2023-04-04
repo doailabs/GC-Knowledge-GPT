@@ -1,7 +1,6 @@
 const platformClient = require('platformClient');
 const client = platformClient.ApiClient.instance;
 
-// API Calls
 async function getKnowledgeBases() {
   const apiInstance = new platformClient.KnowledgeApi();
 
@@ -21,7 +20,6 @@ async function findDataTable() {
 
   try {
     const data = await apiInstance.getFlowsDatatablesDivisionviews(opts);
-    console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
 
     if (data && data.entities && data.entities.length > 0) {
       const dataTableId = data.entities[0].id;
