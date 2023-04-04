@@ -263,6 +263,7 @@ function registerEventHandlers() {
 
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
   saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
+  document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
 }
 
 function toggleWrapUpIdsField() {
@@ -274,12 +275,54 @@ function toggleWrapUpIdsField() {
   } else {
     wrapUpIdsFieldWrapper.style.display = 'none';
   }
+  
+  const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
+  knowledgeBasesTableBody.addEventListener('change', async (event) => {
+    if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
+      const knowledgeBaseId = event.target.value;
+      await displayConfiguration(knowledgeBaseId);
+    }
+  });
+  
 }
 
 function registerToggleWrapUpIdsFieldHandler() {
   const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
   createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
 }
+
+
+async function displayConfiguration(knowledgeBaseId) {
+  const datatable = await findOpenAiIntegrationDatatable();
+  if (datatable) {
+    const datatableRow = await findDatatableRow(datatable.id, knowledgeBaseId);
+    if (datatableRow) {
+      displayCurrentConfiguration(datatableRow);
+    } else {
+      displayNewConfiguration();
+    }
+  } else {
+    console.error('No se encontró la datatable "Open AI - Knowledge Integration".');
+  }
+}
+
+
+function displayCurrentConfiguration(datatableRow) {
+  // Muestra el subapartado "Current configuration" y oculta "New configuration"
+  document.getElementById('currentConfiguration').style.display = 'block';
+  document.getElementById('newConfiguration').style.display = 'none';
+
+  // Rellena los campos de "Current configuration" con los valores de la fila de la datatable
+}
+
+function displayNewConfiguration() {
+  // Oculta el subapartado "Current configuration" y muestra "New configuration"
+  document.getElementById('currentConfiguration').style.display = 'none';
+  document.getElementById('newConfiguration').style.display = 'block';
+
+  // Limpia los campos de "New configuration"
+}
+
 
 // Initialize
 function init() {
