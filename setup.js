@@ -36,7 +36,7 @@ async function findDataTable() {
 	});
 
   return {
-    dataTableId: null
+    dataTableId
   };
 }
 
