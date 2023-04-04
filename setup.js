@@ -125,6 +125,8 @@ async function createDataTable() {
   }
 }
 
+// (El inicio del código no ha sido modificado)
+
 async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens) {
   const newRow = {
     "Knowledge Base Id": knowledgeBaseId,
@@ -144,20 +146,24 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
     "data": [newRow]
   };
 
-  await createRow(dataTableId, rowData);
+  console.log('Inserting row with data:', rowData);
+
+  return await createRow(dataTableId, rowData);
 }
 
 async function createRow(dataTableId, rowData) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    await createRow(dataTableId, rowData);
+    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
+    console.log('Row inserted successfully');
     return true;
   } catch (error) {
     console.error('Error al insertar la fila en la DataTable:', error);
     return false;
   }
-}
+}   
+
 
 // Table Management
 function createKnowledgeBasesTable(knowledgeBases) {
@@ -223,31 +229,31 @@ async function handleSaveConfigurationButtonClick() {
   const wrapUpIds = document.getElementById('wrapUpIds').value;
   const model = document.getElementById('model').value;
   const temperature = document.getElementById('temperature').value;
-  const maxTokens = document.getElementById('maxTokens').value;  
+  const maxTokens = document.getElementById('maxTokens').value;
 
   // Compruebe si todos los campos están llenos
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
     alert('Please fill in all the configuration fields.');
     return;
   }
-
-  const dataTableId = await getConfigurationDataTableId();
+  console.log('Getting or creating data table');
+  let dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
-    const createdDataTable = await createDataTable();
-    dataTableId = createdDataTable.id;
+    console.log('Creating data table');
+    dataTableId = await createConfigurationDataTable();
   }
 
-  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswer,Confidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
-  
+  console.log('DataTable ID:', dataTableId);
+  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
+
   if (rowInserted) {
     alert('Configuration saved.');
   } else {
-  alert('Error saving the configuration.');
+    alert('Error saving the configuration.');
   }
 }
-
-
+  
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
@@ -274,8 +280,8 @@ function registerToggleWrapUpIdsFieldHandler() {
 
 // Initialize
 function init() {
-  registerEventHandlers();
-  registerToggleWrapUpIdsFieldHandler();
+registerEventHandlers();
+registerToggleWrapUpIdsFieldHandler();
 }
 
 init();
