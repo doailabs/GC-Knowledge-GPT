@@ -132,8 +132,6 @@ async function createDataTable() {
   }
 }
 
-// (El inicio del código no ha sido modificado)
-
 async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens) {
   const newRow = {
     "key": knowledgeBaseId,
