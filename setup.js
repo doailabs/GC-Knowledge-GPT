@@ -1,5 +1,3 @@
-//const platformClient = require("purecloud-platform-client-v2");
-//const client = platformClient.ApiClient.instance;
 const platformClient = require('platformClient');
 const client = platformClient.ApiClient.instance;
 
@@ -205,6 +203,11 @@ async function getConfigurationDataTableId() {
   return dataTableId;
 }
 
+async function createConfigurationDataTable() {
+  const dataTable = await createDataTable();
+  return dataTable.id;
+}
+
 async function handleSaveConfigurationButtonClick() {
   const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
@@ -215,7 +218,7 @@ async function handleSaveConfigurationButtonClick() {
   const wrapUpIds = document.getElementById('wrapUpIds').value;
   const model = document.getElementById('model').value;
   const temperature = document.getElementById('temperature').value;
-  const maxTokens = document.getElementById('maxTokens').value;  
+  const maxTokens = document.getElementById('maxTokens').value;
 
   // Compruebe si todos los campos están llenos
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
@@ -223,13 +226,11 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  const dataTableId = await getConfigurationDataTableId();
+  let dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
-    await createConfigurationDataTable();
+    dataTableId = await createConfigurationDataTable();
   }
-
-  const newConfigNumber = await getNextConfigurationNumber(dataTableId);
 
   await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
 
@@ -244,7 +245,6 @@ async function handleSaveConfigurationButtonClick() {
   toggleWrapUpIdsField(); // Hide the Wrap up ids field
 }
 
-
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
@@ -252,4 +252,28 @@ function registerEventHandlers() {
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
   saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
 }
+
+function toggleWrapUpIdsField() {
+  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+  const wrapUpIdsFieldWrapper = document.getElementById('wrapUpIdsFieldWrapper');
+
+  if (createKnowledgeArticlesCheckbox.checked) {
+    wrapUpIdsFieldWrapper.style.display = 'block';
+  } else {
+    wrapUpIdsFieldWrapper.style.display = 'none';
+  }
+}
+
+function registerToggleWrapUpIdsFieldHandler() {
+  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+  createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
+}
+
+// Initialize
+function init() {
+  registerEventHandlers();
+  registerToggleWrapUpIdsFieldHandler();
+}
+
+init();
 
