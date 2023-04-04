@@ -68,7 +68,7 @@ async function createDataTable() {
           "type": "string",
           "$id": "/properties/Language",
           "minLength": 0,
-          "maxLength": 4
+          "maxLength": 8
         },  
         "System Prompt": {
           "title": "System Prompt",
