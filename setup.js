@@ -19,28 +19,27 @@ async function findDataTable() {
   };
 
   try {
-    const data = await apiInstance.getFlowsDatatablesDivisionviews(opts);
+      const data = await apiInstance.getFlowsDatatablesDivisionviews(opts);
 
-    if (data && data.entities && data.entities.length > 0) {
-      const dataTableId = data.entities[0].id;
-      console.log('dataTableId encontrado: ' + dataTableId);
-      return {
-        dataTableId
-      };
-    } else {
+      if (data && data.entities && data.entities.length > 0) {
+        const dataTableId = data.entities[0].id;
+        console.log('dataTableId encontrado: ' + dataTableId);
+        return dataTableId;
+      } else {
       console.log('No se encontró la dataTable');
-      return {
-        dataTableId: null
-      };
-    }
+      return null;
   } catch (err) {
-    console.log("There was a failure calling findDataTable");
-    console.error(err);
-    return{
-      dataTableId: null
-    };
+      console.log("There was a failure calling findDataTable");
+      console.error(err);
+      return null;
   }
 }
+
+async function getConfigurationDataTableId() {
+const dataTableId = await findDataTable();
+return dataTableId;
+}
+
 
 async function createDataTable() {
   let apiInstance = new platformClient.ArchitectApi();
