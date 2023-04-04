@@ -237,23 +237,22 @@ async function handleSaveConfigurationButtonClick() {
     alert('Please fill in all the configuration fields.');
     return;
   }
-  console.log('Getting or creating data table');
+
   let dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
-    console.log('Creating data table');
-    dataTableId = await createConfigurationDataTable();
+    const createdDataTable = await createConfigurationDataTable();
+    dataTableId = createdDataTable.id;
   }
 
-  console.log('DataTable ID:', dataTableId);
-  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
+  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
 
   if (rowInserted) {
     alert('Configuration saved.');
   } else {
     alert('Error saving the configuration.');
   }
-}
+}   
   
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
