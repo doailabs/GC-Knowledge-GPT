@@ -323,17 +323,6 @@ function displayNewConfiguration() {
   // Limpia los campos de "New configuration"
 }
 
-async function findOpenAiIntegrationDatatable() {
-  try {
-    const response = await genesysCloud.api.getFlowsDatatables({ pageSize: 100 });
-    const datatable = response.entities.find(dt => dt.name === 'Open AI - Knowledge Integration');
-    return datatable || null;
-  } catch (error) {
-    console.error('Error al buscar la datatable "Open AI - Knowledge Integration":', error);
-    return null;
-  }
-}
-
 async function findDatatableRow(datatableId, knowledgeBaseId) {
   try {
     const architectApi = new platformClient.ArchitectApi();
