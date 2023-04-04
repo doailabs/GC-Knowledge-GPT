@@ -229,7 +229,7 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  const dataTableId = await getConfigurationDataTableId();
+  let dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
     const createdDataTable = await createDataTable();
