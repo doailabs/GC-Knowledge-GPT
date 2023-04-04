@@ -57,6 +57,13 @@ async function createDataTable() {
           "minLength": 1,
           "maxLength": 36
         },
+        "Language": {
+          "title": "Language",
+          "type": "string",
+          "$id": "/properties/Language",
+          "minLength": 0,
+          "maxLength": 4
+        },  
         "System Prompt": {
           "title": "System Prompt",
           "type": "string",
@@ -129,16 +136,16 @@ async function createDataTable() {
 
 async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens) {
   const newRow = {
-    "Knowledge Base Id": knowledgeBaseId,
-    "System prompt": systemPrompt,
+    "key": knowledgeBaseId,
+    "System Prompt": systemPrompt,
     "Language": language,
-    "Minimum answer confidence": minAnswerConfidence,
-    "No match behavior": noMatchBehavior,
+    "Minimum Answer Confidence": parseFloat(minAnswerConfidence),
+    "No Match Behavior": noMatchBehavior,
     "Create knowledge articles based on wrap ups": createKnowledgeArticles,
     "Wrap up ids for knowledge articles": wrapUpIds,
     "Model": model,
-    "Temperature": temperature,
-    "Max Tokens": maxTokens    
+    "Temperature": parseFloat(temperature),
+    "MaxTokens": parseInt(maxTokens, 10)
   };
 
   const rowData = {
@@ -146,9 +153,7 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
     "data": [newRow]
   };
 
-  console.log('Inserting row with data:', rowData);
-
-  return await createRow(dataTableId, rowData);
+  await createRow(dataTableId, rowData);
 }
 
 async function createRow(dataTableId, rowData) {
