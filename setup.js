@@ -14,29 +14,34 @@ async function getKnowledgeBases() {
 }
 
 async function findDataTable() {
-  let dataTableId;
   let apiInstance = new platformClient.ArchitectApi();
   let opts = { 
     "name": "Open AI - Knowledge Integration"
-  };  
-
-  apiInstance.getFlowsDatatablesDivisionviews(opts)
-    .then((data) => {
-      if (data){
-        dataTableId = data.entities[0].id;
-	if (dataTableId){
-          console.log('dataTableId encontrado: ' + dataTableId);
-	}
-      }
-     })
-     .catch((err) => {
-       console.log("There was a failure calling findDataTable");
-       console.error(err);
-      });
-
-  return {
-    dataTableId
   };
+
+  try {
+    const data = await apiInstance.getFlowsDatatablesDivisionviews(opts);
+    console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
+
+    if (data && data.entities && data.entities.length > 0) {
+      const dataTableId = data.entities[0].id;
+      console.log('dataTableId encontrado: ' + dataTableId);
+      return {
+        dataTableId
+      };
+    } else {
+      console.log('No se encontró la dataTable');
+      return {
+        dataTableId: null
+      };
+    }
+  } catch (err) {
+    console.log("There was a failure calling findDataTable");
+    console.error(err);
+    return{
+      dataTableId: null
+    };
+  }
 }
 
 
