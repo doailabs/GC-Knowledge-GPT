@@ -22,7 +22,7 @@ async function findDataTable() {
   apiInstance.getFlowsDatatablesDivisionviews(opts)
     .then((data) => {
     	console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
-	  if (data.dataTableId){
+	  if (data){
 	    let dataTableId = response.entities[0].id;
 	    console.log('dataTableId encontrado: ' + dataTableId);
 	  }
