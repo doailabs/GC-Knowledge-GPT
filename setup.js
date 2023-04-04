@@ -201,14 +201,41 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
   knowledgeBaseIdInput.value = knowledgeBaseId;
 }
 
-// Event Handlers
 async function handleGetKnowledgeBasesButtonClick() {
   const knowledgeBases = await getKnowledgeBases();
   createKnowledgeBasesTable(knowledgeBases);
 }
 
-function handleKnowledgeBaseSelection(event) {
-  updateKnowledgeBaseId(event.target.value);
+async function handleKnowledgeBaseSelection(event) {
+  const selectedKnowledgeBaseId = event.target.value;
+
+  // Buscar la datatable con nombre "Open AI - Knowledge Integration"
+  const dataTableId = await findDataTable('Open AI - Knowledge Integration');
+
+  if (dataTableId) {
+    // Buscar la fila con el campo clave (key) igual al knowledge base Id seleccionado por el usuario
+    const datatableRow = await findDatatableRow(dataTableId, selectedKnowledgeBaseId);
+
+    if (datatableRow) {
+      // Crear el subapartado "Current configuration"
+      createCurrentConfigurationSubsection(datatableRow);
+
+      // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
+      if (document.getElementById('knowledgeBaseId') !== null) {
+        updateKnowledgeBaseId(selectedKnowledgeBaseId);
+      }
+    } else {
+      // Crear el subapartado "New configuration"
+      createNewConfigurationSubsection();
+
+      // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
+      if (document.getElementById('knowledgeBaseId') !== null) {
+        updateKnowledgeBaseId(selectedKnowledgeBaseId);
+      }
+    }
+  } else {
+    console.error('No se pudo encontrar la datatable "Open AI - Knowledge Integration"');
+  }
 }
 
 async function getConfigurationDataTableId() {
