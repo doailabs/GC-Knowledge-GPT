@@ -163,8 +163,7 @@ async function createRow(dataTableId, rowData) {
     console.log('Row inserted successfully');
     return true;
   } catch (error) {
-    console.error('Error al insertar la fila en la
-    DataTable:', error);
+    console.error('Error al insertar la fila en la DataTable: ', error);
     return false;
   }
 }
