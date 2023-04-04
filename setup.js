@@ -26,8 +26,9 @@ async function findDataTable() {
         console.log('dataTableId encontrado: ' + dataTableId);
         return dataTableId;
       } else {
-      console.log('No se encontró la dataTable');
-      return null;
+        console.log('No se encontró la dataTable');
+        return null;
+      }
   } catch (err) {
       console.log("There was a failure calling findDataTable");
       console.error(err);
