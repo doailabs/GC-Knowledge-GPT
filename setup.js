@@ -151,9 +151,11 @@ async function createRow(dataTableId, rowData) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    await apiInstance.postFlowsDatatableRows(dataTableId, rowData.data);
+    await createRow(dataTableId, rowData);
+    return true;
   } catch (error) {
     console.error('Error al insertar la fila en la DataTable:', error);
+    return false;
   }
 }
 
@@ -221,7 +223,7 @@ async function handleSaveConfigurationButtonClick() {
   const wrapUpIds = document.getElementById('wrapUpIds').value;
   const model = document.getElementById('model').value;
   const temperature = document.getElementById('temperature').value;
-  const maxTokens = document.getElementById('maxTokens').value;
+  const maxTokens = document.getElementById('maxTokens').value;  
 
   // Compruebe si todos los campos están llenos
   if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
@@ -229,23 +231,22 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  let dataTableId = await getConfigurationDataTableId();
+  const dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
     const createdDataTable = await createDataTable();
     dataTableId = createdDataTable.id;
   }
-  
-  alert('Configuration saved.');
 
-  // Clear input fields
-  document.getElementById('knowledgeBaseId').value = '';
-  document.getElementById('systemPrompt').value = '';
-  document.getElementById('minAnswerConfidence').value = 0.85;
-  document.getElementById('createKnowledgeArticles').checked = false;
-  document.getElementById('wrapUpIds').value = '';
-  toggleWrapUpIdsField(); // Hide the Wrap up ids field
+  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswer,Confidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
+  
+  if (rowInserted) {
+    alert('Configuration saved.');
+  } else {
+  alert('Error saving the configuration.');
+  }
 }
+
 
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
