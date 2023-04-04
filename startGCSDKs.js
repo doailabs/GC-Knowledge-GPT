@@ -6,7 +6,7 @@ function startGCSDKs(clientId) {
     const qParamEnvironment = 'environment';
 
     let language = 'en-us';
-    let redirectUri = 'doailabs.github.io/GC-Knowledge-GPT/';
+    let redirectUri = 'https://doailabs.github.io/GC-Knowledge-GPT/';
     let userDetails = null;
     let environment = "mypurecloud.de";
 
