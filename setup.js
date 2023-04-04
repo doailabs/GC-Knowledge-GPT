@@ -14,6 +14,7 @@ async function getKnowledgeBases() {
 }
 
 async function findDataTable() {
+  let dataTableId;
   let apiInstance = new platformClient.ArchitectApi();
   let opts = { 
     "name": "Open AI - Knowledge Integration"
@@ -23,7 +24,7 @@ async function findDataTable() {
     .then((data) => {
     	console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
 	  if (data){
-	    let dataTableId = data.entities[0].id;
+	    dataTableId = data.entities[0].id;
 	    if (dataTableId){
 	    	console.log('dataTableId encontrado: ' + dataTableId);
 	    }
