@@ -269,6 +269,17 @@ function registerToggleWrapUpIdsFieldHandler() {
   createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
 }
 
+async function createRow(dataTableId, rowData) {
+  let apiInstance = new platformClient.ArchitectApi();
+
+  try {
+    const response = await apiInstance.patchFlowsDatatablesDatatableId(dataTableId, rowData);
+    return response;
+  } catch (error) {
+    console.error('Error al insertar la fila en la DataTable:', error);
+  }
+}
+
 // Initialize
 function init() {
   registerEventHandlers();
