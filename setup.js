@@ -13,7 +13,7 @@ async function getKnowledgeBases() {
   }
 }
 
-async function findDataTableAndMaxConfigNumber() {
+async function findDataTable() {
   let apiInstance = new platformClient.ArchitectApi();
 
   try {
@@ -23,25 +23,19 @@ async function findDataTableAndMaxConfigNumber() {
     );
 
     if (targetDataTable) {
-      const dataTableDetails = await apiInstance.getFlowsDatatablesDatatableId(targetDataTable.id);
-      const maxConfigNumber = Math.max(
-        ...dataTableDetails.rows.map((row) => row.fields['Config Number'])
-      );
-
       return {
-        dataTableId: targetDataTable.id,
-        maxConfigNumber
+        dataTableId: targetDataTable.id
       };
     }
   } catch (error) {
-    console.error('Error al obtener las DataTables y el maxConfigNumber:', error);
+    console.error('Error al obtener las DataTables:', error);
   }
 
   return {
-    dataTableId: null,
-    maxConfigNumber: null
+    dataTableId: null
   };
 }
+
 
 async function createDataTable() {
   let apiInstance = new platformClient.ArchitectApi();
@@ -208,7 +202,7 @@ function handleKnowledgeBaseSelection(event) {
 }
 
 async function getConfigurationDataTableId() {
-  const { dataTableId } = await findDataTableAndMaxConfigNumber();
+  const { dataTableId } = await findDataTable();
   return dataTableId;
 }
 
