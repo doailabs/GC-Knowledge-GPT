@@ -22,18 +22,17 @@ async function findDataTable() {
 
   apiInstance.getFlowsDatatablesDivisionviews(opts)
     .then((data) => {
-    	console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
-	  if (data){
-	    dataTableId = data.entities[0].id;
-	    if (dataTableId){
-	    	console.log('dataTableId encontrado: ' + dataTableId);
-	    }
-	  }
-	})
-	.catch((err) => {
-	  console.log("There was a failure calling findDataTable");
-	  console.error(err);
-	});
+      if (data){
+        dataTableId = data.entities[0].id;
+	if (dataTableId){
+          console.log('dataTableId encontrado: ' + dataTableId);
+	}
+      }
+     })
+     .catch((err) => {
+       console.log("There was a failure calling findDataTable");
+       console.error(err);
+      });
 
   return {
     dataTableId
