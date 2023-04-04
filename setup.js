@@ -235,14 +235,13 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  let dataTableId = await getConfigurationDataTableId();
+  const dataTableId = await getConfigurationDataTableId();
 
   if (!dataTableId) {
-    dataTableId = await createConfigurationDataTable();
+    const createdDataTable = await createDataTable();
+    dataTableId = createdDataTable.id;
   }
-
-  await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens);
-
+  
   alert('Configuration saved.');
 
   // Clear input fields
