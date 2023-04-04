@@ -148,10 +148,7 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
     "MaxTokens": parseInt(maxTokens, 10)
   };
 
-  const rowData = {
-    "action": "append",
-    "data": [newRow]
-  };
+  const rowData = {[newRow]};
 
   await createRow(dataTableId, rowData);
 }
@@ -160,7 +157,6 @@ async function createRow(dataTableId, rowData) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
     console.log('Row inserted successfully');
     return true;
   } catch (error) {
