@@ -153,6 +153,17 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
   await createRow(dataTableId, rowData);
 }
 
+async function createRow(dataTableId, rowData) {
+  let apiInstance = new platformClient.ArchitectApi();
+
+  try {
+    const response = await apiInstance.patchFlowsDatatablesDatatableId(dataTableId, rowData);
+    return response;
+  } catch (error) {
+    console.error('Error al insertar la fila en la DataTable:', error);
+  }
+}
+
 
 // Table Management
 function createKnowledgeBasesTable(knowledgeBases) {
@@ -267,17 +278,6 @@ function toggleWrapUpIdsField() {
 function registerToggleWrapUpIdsFieldHandler() {
   const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
   createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
-}
-
-async function createRow(dataTableId, rowData) {
-  let apiInstance = new platformClient.ArchitectApi();
-
-  try {
-    const response = await apiInstance.patchFlowsDatatablesDatatableId(dataTableId, rowData);
-    return response;
-  } catch (error) {
-    console.error('Error al insertar la fila en la DataTable:', error);
-  }
 }
 
 // Initialize
