@@ -15,21 +15,22 @@ async function getKnowledgeBases() {
 
 async function findDataTable() {
   let apiInstance = new platformClient.ArchitectApi();
+  let opts = { 
+    "name": "Open AI - Knowledge Integration"
+  };  
 
-  try {
-    const response = await apiInstance.getFlowsDatatables();
-    const targetDataTable = response.entities.find(
-      (dataTable) => dataTable.name === 'Open AI - Knowledge Integration'
-    );
-
-    if (targetDataTable) {
-      return {
-        dataTableId: targetDataTable.id
-      };
-    }
-  } catch (error) {
-    console.error('Error al obtener las DataTables:', error);
-  }
+  apiInstance.getFlowsDatatablesDivisionviews(opts)
+    .then((data) => {
+    	console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
+		if (data.dataTableId){
+			let dataTableId = data.dataTableId;
+			console.log('dataTableId encontrado: ' + dataTableId);
+		}
+	})
+	.catch((err) => {
+	  console.log("There was a failure calling findDataTable");
+	  console.error(err);
+	});
 
   return {
     dataTableId: null
