@@ -235,10 +235,14 @@ async function handleSaveConfigurationButtonClick() {
   }
 
   let dataTableId = await getConfigurationDataTableId();
+  
+  console.log
 
   if (!dataTableId) {
     const createdDataTable = await createConfigurationDataTable();
     dataTableId = createdDataTable.id;
+  } else {
+    console.log('Se ha encontrado una data table con id: ' + dataTableId);
   }
 
   const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
