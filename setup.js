@@ -42,7 +42,6 @@ async function findDataTable() {
   }
 }
 
-
 async function createDataTable() {
   let apiInstance = new platformClient.ArchitectApi();
   const dataTableSchema = {  
