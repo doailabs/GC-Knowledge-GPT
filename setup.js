@@ -336,32 +336,39 @@ async function findOpenAiIntegrationDatatable() {
 
 async function findDatatableRow(datatableId, knowledgeBaseId) {
   try {
-    const response = await genesysCloud.api.getFlowsDatatableRows(datatableId, { showbrief: false });
-    const datatableRow = response.entities.find(row => row.key === knowledgeBaseId);
-    return datatableRow || null;
+    const architectApi = new platformClient.ArchitectApi();
+    const opts = {
+      'showbrief': false
+    };
+
+    const response = await architectApi.getFlowsDatatableRows(datatableId, opts);
+    const row = response.entities.find(row => row.key === knowledgeBaseId);
+    return row;
   } catch (error) {
-    console.error(`Error al buscar la fila con key "${knowledgeBaseId}" en la datatable:`, error);
-    return null;
+    console.error(`Error finding datatable row with key '${knowledgeBaseId}':`, error);
   }
 }
 
-async function updateConfiguration(datatableId, rowId, updatedRowData) {
+async function updateConfiguration(datatableId, rowId, config) {
   try {
-    await genesysCloud.api.putFlowsDatatableRow(datatableId, rowId, updatedRowData);
-    console.log('Configuración actualizada con éxito.');
+    const architectApi = new platformClient.ArchitectApi();
+    const response = await architectApi.putFlowsDatatableRow(datatableId, rowId, config);
+    return response;
   } catch (error) {
-    console.error('Error al actualizar la configuración en la datatable:', error);
+    console.error('Error updating configuration:', error);
   }
 }
 
-async function saveNewConfiguration(datatableId, newRowData) {
+async function saveNewConfiguration(datatableId, config) {
   try {
-    await genesysCloud.api.postFlowsDatatableRows(datatableId, newRowData);
-    console.log('Nueva configuración guardada con éxito.');
+    const architectApi = new platformClient.ArchitectApi();
+    const response = await architectApi.postFlowsDatatableRows(datatableId, config);
+    return response;
   } catch (error) {
-    console.error('Error al guardar la nueva configuración en la datatable:', error);
+    console.error('Error saving new configuration:', error);
   }
 }
+
 
 // Initialize
 function init() {
