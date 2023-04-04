@@ -148,9 +148,7 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
     "MaxTokens": parseInt(maxTokens, 10)
   };
 
-  const rowData = {[newRow]};
-
-  await createRow(dataTableId, rowData);
+  await createRow(dataTableId, newRow);
 }
 
 async function createRow(dataTableId, rowData) {
