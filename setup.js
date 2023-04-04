@@ -154,16 +154,14 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
 }
 
 async function createRow(dataTableId, rowData) {
-  let apiInstance = new platformClient.ArchitectApi();
+  const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    const response = await apiInstance.patchFlowsDatatablesDatatableId(dataTableId, rowData);
-    return response;
+    await apiInstance.postFlowsDatatableRows(dataTableId, rowData.data);
   } catch (error) {
     console.error('Error al insertar la fila en la DataTable:', error);
   }
 }
-
 
 // Table Management
 function createKnowledgeBasesTable(knowledgeBases) {
