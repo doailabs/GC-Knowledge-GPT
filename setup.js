@@ -23,7 +23,7 @@ async function findDataTable() {
     .then((data) => {
     	console.log(`findDataTable success! data: ${JSON.stringify(data, null, 2)}`);
 	  if (data.dataTableId){
-	    let dataTableId = data.dataTableId;
+	    let dataTableId = response.entities[0].id;
 	    console.log('dataTableId encontrado: ' + dataTableId);
 	  }
 	})
