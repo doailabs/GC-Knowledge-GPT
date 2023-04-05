@@ -333,9 +333,10 @@ async function displayConfiguration(knowledgeBaseId) {
 }
 
 function displayCurrentConfiguration(datatableRow) {
-  // Muestra el subapartado "Current configuration" y oculta "New configuration"
   document.getElementById('currentConfiguration').style.display = 'block';
   document.getElementById('newConfiguration').style.display = 'none';
+  document.getElementById('updateConfigurationBtn').style.display = 'inline-block';
+  document.getElementById('saveConfigurationBtn').style.display = 'none';
 
   // Rellena los campos de "Current configuration" con los valores de la fila de la datatable
   document.getElementById('systemPrompt').value = datatableRow['System Prompt'];
@@ -350,21 +351,12 @@ function displayCurrentConfiguration(datatableRow) {
 }
 
 function displayNewConfiguration() {
-  // Oculta el subapartado "Current configuration" y muestra "New configuration"
   document.getElementById('currentConfiguration').style.display = 'none';
   document.getElementById('newConfiguration').style.display = 'block';
-
-  // Limpia los campos de "New configuration"
-  document.getElementById('systemPrompt').value = '';
-  document.getElementById('language').value = '';
-  document.getElementById('minAnswerConfidence').value = '';
-  document.getElementById('noMatchBehavior').value = '';
-  document.getElementById('createKnowledgeArticles').checked = false;
-  document.getElementById('wrapUpIds').value = '';
-  document.getElementById('model').value = '';
-  document.getElementById('temperature').value = '';
-  document.getElementById('maxTokens').value = '';
+  document.getElementById('updateConfigurationBtn').style.display = 'none';
+  document.getElementById('saveConfigurationBtn').style.display = 'inline-block';
 }
+
 
 async function findDatatableRow(datatableId, knowledgeBaseId) {
   try {
