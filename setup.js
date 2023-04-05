@@ -402,6 +402,30 @@ async function saveNewConfiguration(datatableId, config) {
   }
 }
 
+function adjustInputSize(input, maxSize) {
+  if (input.value.length > maxSize) {
+    input.size = input.value.length;
+  } else {
+    input.size = maxSize;
+  }
+}
+
+function toggleWrapUpIdsField() {
+  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+  const wrapUpIdsField = document.getElementById('wrapUpIdsField');
+
+  if (createKnowledgeArticlesCheckbox.checked) {
+    wrapUpIdsField.style.display = 'block';
+  } else {
+    wrapUpIdsField.style.display = 'none';
+  }
+}
+
+function registerToggleWrapUpIdsFieldHandler() {
+  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+  createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
+}
+
 
 // Initialize
 function init() {
