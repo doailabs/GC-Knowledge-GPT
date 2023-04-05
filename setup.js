@@ -301,23 +301,6 @@ function registerEventHandlers() {
   });
 }
 
-
-function toggleWrapUpIdsField() {
-  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
-  const wrapUpIdsFieldWrapper = document.getElementById('wrapUpIdsFieldWrapper');
-
-  if (createKnowledgeArticlesCheckbox.checked) {
-    wrapUpIdsFieldWrapper.style.display = 'block';
-  } else {
-    wrapUpIdsFieldWrapper.style.display = 'none';
-  }
-}
-
-function registerToggleWrapUpIdsFieldHandler() {
-  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
-  createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
-}
-
 async function displayConfiguration(knowledgeBaseId) {
   const datatableId = await findDataTable();
   if (datatableId) {
