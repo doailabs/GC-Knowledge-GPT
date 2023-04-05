@@ -1,3 +1,6 @@
+const platformClient = require('platformClient');
+const client = platformClient.ApiClient.instance;
+
 async function getKnowledgeBases() {
   const apiInstance = new platformClient.KnowledgeApi();
 
