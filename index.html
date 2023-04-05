@@ -30,9 +30,8 @@
       </thead>
       <tbody id="knowledgeBasesTableBody">
         <!-- Aquí se mostrarán las Knowledge Bases -->
-</tbody>
-</table>
-
+      </tbody>
+    </table>
   </div>
   <!-- Subapartado Current Configuration -->
   <div id="currentConfiguration" style="display:none;">
@@ -56,14 +55,105 @@
       registerEventHandlers();
     });
 
+    function adjustInputSize(input, maxSize) {
+      if (input.value.length > maxSize) {
+        input.size = input.value.length;
+      } else {
+        input.size = maxSize;
+      }
+    }
+    
+    function toggleWrapUpIdsField() {
+      const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
+      const wrapUpIdsField = document.getElementById('wrapUpIdsField');
+
+      if (createKnowledgeArticlesCheckbox.checked) {
+        wrapUpIdsField.style.display = 'block';
+      } else {
+        wrapUpIdsField.style.display = 'none';
+      }
+    }
+    
     // Copia la estructura de campos del formulario de configuración a ambos subapartados
     const configurationFields = document.createElement('div');
     configurationFields.innerHTML = `
-      <!-- Aquí se incluyen los mismos campos que en tu versión anterior del archivo index.html, en la sección "Configuration" -->
+      <div>
+        <h3>Configuration</h3>
+
+        <!-- Campo Language -->
+        <div>
+          <label for="language">Language:</label>
+          <select id="language">
+            <option value="en-US">en-US</option>
+            <option value="es-ES">es-ES</option>
+          </select>
+        </div>
+
+        <!-- Campo Knowledge Base Id -->
+        <div>
+          <label for="knowledgeBaseId">Knowledge Base Id:</label>
+          <input type="text" id="knowledgeBaseId" size="36">
+        </div>
+
+        <!-- Campo Minimum answer confidence -->
+        <div>
+          <label for="minAnswerConfidence">Minimum answer confidence:</label>
+          <input type="number" id="minAnswerConfidence" step="0.1" min="0" max="1" size="3" value="0.85">
+        </div>
+
+        <!-- Campo System prompt -->
+        <div>
+          <label for="systemPrompt">System prompt:</label>
+          <input type="text" id="systemPrompt" onInput="adjustInputSize(this, 100)" size="100">
+        </div>
+
+        <!-- Campo No match behavior -->
+        <div>
+          <label for="noMatchBehavior">No match behavior:</label>
+          <select id="noMatchBehavior">
+            <option value="routeToAgent">Route to agent</option>
+            <option value="keepBotLoop">Keep the bot loop</option>
+          </select>
+        </div>   
+
+        <!-- Campo Create knowledge articles based on wrap ups -->
+        <div>
+          <label for="createKnowledgeArticles">Create knowledge articles based on wrap ups:</label>
+          <input type="checkbox" id="createKnowledgeArticles" onchange="toggleWrapUpIdsField()">
+        </div>
+
+        <!-- Campo Wrap up ids for knowledge articles (separated by ;) -->
+        <div id="wrapUpIdsField" style="display:none;">
+          <label for="wrapUpIds">Wrap up ids for knowledge articles (separated by ;):</label>
+          <input type="text" id="wrapUpIds">
+        </div>
+
+        <!-- Campo Model -->
+        <div>
+          <label for="model">Model:</label>
+          <input type="text" id="model" value="gpt-3.5-turbo">
+        </div>
+
+        <!-- Campo Temperature -->
+        <div>
+          <label for="temperature">Temperature:</label>
+          <input type="number" id="temperature" step="0.1" min="0" max="1" size="3" value="0">
+        </div>
+
+        <!-- Campo MaxTokens -->
+        <div>
+          <label for="maxTokens">Max Tokens:</label>
+          <input type="number" id="maxTokens" min="0" size="4" value="512">
+        </div>
+
+        <!-- Botón Save configuration -->
+        <div>
+          <button id="saveConfigurationBtn">Save configuration</button>
+        </div>
+      </div>
     `;
     document.getElementById('currentConfigurationForm').appendChild(configurationFields.cloneNode(true));
     document.getElementById('newConfigurationForm').appendChild(configurationFields.cloneNode(true));
-
   </script>
 </body>
 </html>
