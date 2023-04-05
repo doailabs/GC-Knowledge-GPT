@@ -226,7 +226,7 @@ async function handleKnowledgeBaseSelection(event) {
       }
     } else {
       // Crear el subapartado "New configuration"
-      displayNewConfiguration(); // Cambiado aquí
+      displayNewConfiguration();
 
       // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
       if (document.getElementById('knowledgeBaseId') !== null) {
@@ -412,12 +412,12 @@ function adjustInputSize(input, maxSize) {
 
 function toggleWrapUpIdsField() {
   const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
-  const wrapUpIdsField = document.getElementById('wrapUpIdsField');
+  const wrapUpIdsFieldWrapper = document.getElementById('wrapUpIdsFieldWrapper');
 
   if (createKnowledgeArticlesCheckbox.checked) {
-    wrapUpIdsField.style.display = 'block';
+    wrapUpIdsFieldWrapper.style.display = 'block';
   } else {
-    wrapUpIdsField.style.display = 'none';
+    wrapUpIdsFieldWrapper.style.display = 'none';
   }
 }
 
@@ -425,7 +425,6 @@ function registerToggleWrapUpIdsFieldHandler() {
   const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
   createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
 }
-
 
 // Initialize
 function init() {
