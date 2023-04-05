@@ -8,7 +8,11 @@
   <script src="https://sdk-cdn.mypurecloud.com/javascript/latest/purecloud-platform-client-v2.min.js"></script>
   <script src="https://sdk-cdn.mypurecloud.com/client-apps/2.6.3/purecloud-client-app-sdk-de77761d.min.js"></script>
   <script src="startGCSDKs.js"></script>
-  <script src="setup.js"></script>
+  <script src="api.js"></script>
+  <script src="dataTable.js"></script>
+  <script src="configurations.js"></script>
+  <script src="ui.js"></script>
+  <script src="init.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -50,6 +54,7 @@
     <button id="saveConfigurationBtn" onclick="saveNewConfiguration()">Save configuration</button>
   </div>
   <script>
+    
     const clientId = '479255ae-cf23-4c2e-9209-555370df882c';
     startGCSDKs(clientId).then(() => {
       registerEventHandlers();
@@ -60,7 +65,6 @@
       document.getElementById('knowledgeBaseId').value = selectedKnowledgeBaseId;
       displayConfiguration(selectedKnowledgeBaseId);
     });
-
     
     // Copia la estructura de campos del formulario de configuración a ambos subapartados
     const configurationFields = document.createElement('div');
