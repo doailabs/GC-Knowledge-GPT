@@ -62,16 +62,15 @@
 
     document.getElementById('knowledgeBasesTable').addEventListener('change', function (event) {
       const selectedKnowledgeBaseId = event.target.value;
-      document.getElementById('knowledgeBaseId').value = selectedKnowledgeBaseId;
+      document.getElementById('knowledgeBaseIdNew').value = selectedKnowledgeBaseId;
       displayConfiguration(selectedKnowledgeBaseId);
     });
+
     
     // Copia la estructura de campos del formulario de configuración a ambos subapartados
     const configurationFields = document.createElement('div');
     configurationFields.innerHTML = `
       <div>
-        <h3>Configuration</h3>
-
         <!-- Campo Language -->
         <div>
           <label for="language">Language:</label>
