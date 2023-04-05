@@ -33,42 +33,43 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
   knowledgeBaseIdInput.value = knowledgeBaseId;
 }
 
-function displayCurrentConfiguration(datatableRow) {
-  document.getElementById('currentConfiguration').style.display = 'block';
-  document.getElementById('newConfiguration').style.display = 'none';
-  document.getElementById('updateConfigurationBtn').style.display = 'inline-block';
-  document.getElementById('saveConfigurationBtn').style.display = 'none';
+function displayConfiguration(knowledgeBaseId) {
+  const existingConfigurationSection = document.getElementById('existingConfiguration');
+  const newConfigurationSection = document.getElementById('newConfiguration');
+  
+  // Buscar la tabla "Open AI - Knowledge Integration"
+  getClientAppByName('Open AI - Knowledge Integration')
+    .then((clientApp) => {
+      // Si se encuentra la tabla, buscar la fila correspondiente
+      const knowledgeBaseIdField = `key_value_data/knowledge_base_id/${knowledgeBaseId}`;
+      return getClientAppData(clientApp.id, knowledgeBaseIdField);
+    })
+    .then((rowData) => {
+      if (rowData) {
+        // Si se encuentra la fila, mostrar la sección Existing configuration y llenar los campos
+        existingConfigurationSection.style.display = 'block';
+        newConfigurationSection.style.display = 'none';
 
-  // Rellena los campos de "Current configuration" con los valores de la fila de la datatable
-  document.getElementById('systemPrompt').value = datatableRow['System Prompt'];
-  document.getElementById('language').value = datatableRow['Language'];
-  document.getElementById('minAnswerConfidence').value = datatableRow['Minimum Answer Confidence'];
-  document.getElementById('noMatchBehavior').value = datatableRow['No Match Behavior'];
-  document.getElementById('createKnowledgeArticles').checked = datatableRow['Create knowledge articles based on wrap ups'];
-  document.getElementById('wrapUpIds').value = datatableRow['Wrap up ids for knowledge articles'];
-  document.getElementById('model').value = datatableRow['Model'];
-  document.getElementById('temperature').value = datatableRow['Temperature'];
-  document.getElementById('maxTokens').value = datatableRow['Max Tokens'];
+        document.getElementById('knowledgeBaseIdExisting').value = rowData.key_value_data.knowledge_base_id;
+        document.getElementById('language').value = rowData.key_value_data.language;
+        document.getElementById('minAnswerConfidence').value = rowData.key_value_data.min_answer_confidence;
+        document.getElementById('systemPrompt').value = rowData.key_value_data.system_prompt;
+        document.getElementById('noMatchBehavior').value = rowData.key_value_data.no_match_behavior;
+        document.getElementById('createKnowledgeArticles').checked = rowData.key_value_data.create_knowledge_articles;
+        document.getElementById('wrapUpIds').value = rowData.key_value_data.wrap_up_ids;
+        document.getElementById('model').value = rowData.key_value_data.model;
+        document.getElementById('temperature').value = rowData.key_value_data.temperature;
+        document.getElementById('maxTokens').value = rowData.key_value_data.max_tokens;
+      } else {
+        // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
+        existingConfigurationSection.style.display = 'none';
+        newConfigurationSection.style.display = 'block';
+
+        document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
-function displayNewConfiguration() {
-  document.getElementById('currentConfiguration').style.display = 'none';
-  document.getElementById('newConfiguration').style.display = 'block';
-  document.getElementById('updateConfigurationBtn').style.display = 'none';
-  document.getElementById('saveConfigurationBtn').style.display = 'inline-block';
-}
-
-
-async function displayConfiguration(knowledgeBaseId) {
-  const datatableId = await findDataTable();
-  if (datatableId) {
-    const datatableRow = await findDatatableRow(datatableId, knowledgeBaseId);
-    if (datatableRow) {
-      displayCurrentConfiguration(datatableRow);
-    } else {
-      displayNewConfiguration();
-    }
-  } else {
-    console.error('No se encontró la datatable "Open AI - Knowledge Integration"');
-  }
-}
