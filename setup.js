@@ -321,8 +321,9 @@ function registerToggleWrapUpIdsFieldHandler() {
 
 async function displayConfiguration(knowledgeBaseId) {
   const datatable = await findDataTable();
-  if (datatable) {
-    const datatableRow = await findDatatableRow(datatable.id, knowledgeBaseId);
+  if (datatable && datatable.id) {
+    const datatableId = datatable.id;
+    const datatableRow = await findDatatableRow(datatableId, knowledgeBaseId);
     if (datatableRow) {
       displayCurrentConfiguration(datatableRow);
     } else {
