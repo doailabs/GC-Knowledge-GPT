@@ -404,9 +404,14 @@ async function saveNewConfiguration(datatableId, config) {
 
 // Initialize
 function init() {
-    document.addEventListener('DOMContentLoaded', registerEventHandlers);
-    registerToggleWrapUpIdsFieldHandler();document.addEventListener('DOMContentLoaded', registerToggleWrapUpIdsFieldHandler);
+  // Llama a registerEventHandlers cuando el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    registerEventHandlers();
+    registerToggleWrapUpIdsFieldHandler();
+  });
 }
 
+// Llama a la función init
 init();
+
 
