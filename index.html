@@ -56,25 +56,6 @@
       registerEventHandlers();
     });
 
-    function adjustInputSize(input, maxSize) {
-      if (input.value.length > maxSize) {
-        input.size = input.value.length;
-      } else {
-        input.size = maxSize;
-      }
-    }
-    
-    function toggleWrapUpIdsField() {
-      const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
-      const wrapUpIdsField = document.getElementById('wrapUpIdsField');
-
-      if (createKnowledgeArticlesCheckbox.checked) {
-        wrapUpIdsField.style.display = 'block';
-      } else {
-        wrapUpIdsField.style.display = 'none';
-      }
-    }
-    
     // Copia la estructura de campos del formulario de configuración a ambos subapartados
     const configurationFields = document.createElement('div');
     configurationFields.innerHTML = `
