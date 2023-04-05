@@ -319,7 +319,7 @@ function registerToggleWrapUpIdsFieldHandler() {
 
 
 async function displayConfiguration(knowledgeBaseId) {
-  const datatable = await findOpenAiIntegrationDatatable();
+  const datatable = await findDataTable();
   if (datatable) {
     const datatableRow = await findDatatableRow(datatable.id, knowledgeBaseId);
     if (datatableRow) {
