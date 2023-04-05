@@ -57,3 +57,18 @@ function displayNewConfiguration() {
   document.getElementById('updateConfigurationBtn').style.display = 'none';
   document.getElementById('saveConfigurationBtn').style.display = 'inline-block';
 }
+
+
+async function displayConfiguration(knowledgeBaseId) {
+  const datatableId = await findDataTable();
+  if (datatableId) {
+    const datatableRow = await findDatatableRow(datatableId, knowledgeBaseId);
+    if (datatableRow) {
+      displayCurrentConfiguration(datatableRow);
+    } else {
+      displayNewConfiguration();
+    }
+  } else {
+    console.error('No se encontró la datatable "Open AI - Knowledge Integration"');
+  }
+}
