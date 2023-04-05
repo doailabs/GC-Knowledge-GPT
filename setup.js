@@ -318,11 +318,9 @@ function registerToggleWrapUpIdsFieldHandler() {
   createKnowledgeArticlesCheckbox.addEventListener('change', toggleWrapUpIdsField);
 }
 
-
 async function displayConfiguration(knowledgeBaseId) {
-  const datatable = await findDataTable();
-  if (datatable && datatable.id) {
-    const datatableId = datatable.id;
+  const datatableId = await findDataTable();
+  if (datatableId) {
     const datatableRow = await findDatatableRow(datatableId, knowledgeBaseId);
     if (datatableRow) {
       displayCurrentConfiguration(datatableRow);
@@ -330,7 +328,7 @@ async function displayConfiguration(knowledgeBaseId) {
       displayNewConfiguration();
     }
   } else {
-    console.error('No se encontró la datatable "Open AI - Knowledge Integration".');
+    console.error('No se encontró la datatable "Open AI - Knowledge Integration"');
   }
 }
 
