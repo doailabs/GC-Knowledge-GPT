@@ -169,36 +169,6 @@ async function updateConfiguration(datatableId, rowId, config) {
   }
 }
 
-async function saveNewConfiguration() {
-  const architectApi = new platformClient.ArchitectApi();
-  const newConfig = {
-    "key": document.getElementById('knowledgeBaseIdNew').value,
-    "Language": document.getElementById('language').value,
-    "Minimum Answer Confidence": parseFloat(document.getElementById('minAnswerConfidence').value),
-    "System Prompt": document.getElementById('systemPrompt').value,
-    "No Match Behavior": document.getElementById('noMatchBehavior').value,
-    "Create knowledge articles based on wrap ups": document.getElementById('createKnowledgeArticles').checked,
-    "Wrap up ids for knowledge articles": document.getElementById('wrapUpIds').value,
-    "Model": document.getElementById('model').value,
-    "Temperature": parseFloat(document.getElementById('temperature').value),
-    "MaxTokens": parseInt(document.getElementById('maxTokens').value, 10)
-  };
-
-  const dataTableId = await getConfigurationDataTableId();
-  
-  if (!dataTableId) {
-    const createdDataTable = await createConfigurationDataTable();
-    dataTableId = createdDataTable.id;
-  } else {
-    console.log('Se ha encontrado una data table con id: ' + dataTableId);
-  }
-
-  await insertConfigurationRow(dataTableId, newConfig);
-  console.log('New configuration saved.');
-}
-
-
-
 
 
 
