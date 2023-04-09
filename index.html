@@ -37,19 +37,19 @@
       </tbody>
     </table>
   </div>
-  <!-- Subapartado Current Configuration -->
-  <div id="currentConfiguration" style="display:none;">
-    <h3>Current configuration</h3>
-    <form id="currentConfigurationForm">
+  <!-- Subapartado Existing Configuration -->
+  <div id="existingConfiguration" style="display:none;">
+    <h3>Existing configuration</h3>
+    <form id="existingConfigurationForm">
       <!-- Aquí se mostrarán los mismos campos que en New configuration -->
     </form>
     <button id="updateConfigurationBtn" onclick="updateConfiguration()">Update configuration</button>
   </div>
   <!-- Subapartado New Configuration -->
-  <div id="newConfiguration">
+  <div id="newConfiguration" style="display:none;">
     <h3>New configuration</h3>
     <form id="newConfigurationForm">
-      <!-- Aquí se mostrarán los mismos campos que en Current configuration -->
+      <!-- Aquí se mostrarán los mismos campos que en Existing configuration -->
     </form>
     <button id="saveConfigurationBtn" onclick="saveNewConfiguration()">Save configuration</button>
   </div>
@@ -66,8 +66,8 @@
       displayConfiguration(selectedKnowledgeBaseId);
     });
 
-    const currentConfigurationFields = document.createElement('div');
-    currentConfigurationFields.innerHTML = `
+    const existingConfigurationFields = document.createElement('div');
+    existingConfigurationFields.innerHTML = `
       <!-- Copia la estructura de campos del formulario de configuración a ambos subapartados -->
       ...
       <input type="text" id="knowledgeBaseIdExisting" size="36">
@@ -80,8 +80,9 @@
       <input type="text" id="knowledgeBaseIdNew" size="36">
       ...
     `;
-    document.getElementById('currentConfigurationForm').appendChild(currentConfigurationFields.cloneNode(true));
+    document.getElementById('existingConfigurationForm').appendChild(existingConfigurationFields.cloneNode(true));
     document.getElementById('newConfigurationForm').appendChild(newConfigurationFields.cloneNode(true));
-      </script>
-  </body>
-</html>    
+  </script>
+</body>
+</html>
+
