@@ -1,3 +1,12 @@
+/* Paleta de colores */
+:root {
+  --main-color: #3498db;
+  --background-color: #f8f8f8;
+  --text-color: #333;
+  --interactive-color: #f1c40f;
+  --highlight-color: #ecf0f1;
+}
+
 /* Animaciones */
 @keyframes fadeIn {
   from {
@@ -27,9 +36,13 @@
 
 body {
   font-family: 'Helvetica', sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.5;
+}
+
+body > * {
+  margin-bottom: 1.5rem;
 }
 
 h1 {
@@ -37,7 +50,7 @@ h1 {
   margin-bottom: 1rem;
   text-align: center;
   padding: 2rem 0;
-  background-color: #333;
+  background-color: var(--main-color);
   color: #fff;
 }
 
@@ -46,7 +59,7 @@ button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   margin: 1rem auto;
-  background-color: #333;
+  background-color: var(--main-color);
   color: #fff;
   border: none;
   cursor: pointer;
@@ -56,7 +69,7 @@ button {
 }
 
 button:hover {
-  background-color: #444;
+  background-color: #2980b9;
   transform: translateY(-3px);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
@@ -101,7 +114,7 @@ table {
 }
 
 table thead {
-  background-color: #333;
+  background-color: var(--main-color);
   color: #fff;
 }
 
@@ -112,7 +125,7 @@ table td {
 }
 
 table tbody tr:nth-child(odd) {
-  background-color: #eee;
+  background-color: var(--highlight-color);
 }
 
 table tbody tr:hover {
@@ -133,19 +146,39 @@ td:first-child {
   width: 20%;
 }
 
-@media screen and (max-width: 768px) {
-  table {
-    font-size: 0.8rem;
-  }
-  
-  th,
-  td {
-    padding: 0.2rem;
-    font-size: 1rem;
-  }
+input,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid var(--text-color);
+  background-color: #fff;
+  color: var(--text-color);
+}
 
-  th:first-child,
-  td:first-child {
-    width: 30%;
-  }
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--main-color);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+table {
+  font-size: 0.8rem;
+}
+
+th,
+td {
+  padding: 0.2rem;
+  font-size: 1rem;
+}
+
+th:first-child,
+td:first-child {
+  width: 30%;
+}
 }
