@@ -34,6 +34,27 @@ async function handleSaveConfigurationButtonClick() {
   }
 } 
 
+async function handleUpdateConfigurationButtonClick() {
+  const knowledgeBaseId = document.getElementById('knowledgeBaseIdNew').value;
+  const systemPrompt = document.getElementById('systemPrompt').value;
+  const language = document.getElementById('language').value;
+  const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
+  const noMatchBehavior = document.getElementById('noMatchBehavior').value;
+  const createKnowledgeArticles = document.getElementById('createKnowledgeArticles').checked;
+  const wrapUpIds = document.getElementById('wrapUpIds').value;
+  const model = document.getElementById('model').value;
+  const temperature = document.getElementById('temperature').value;
+  const maxTokens = document.getElementById('maxTokens').value;
+
+  const rowUpdated = await updateConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
+
+  if (rowUpdated) {
+    alert('Configuration updated.');
+  } else {
+    alert('Error updating the configuration.');
+  }
+} 
+
 
 async function handleGetKnowledgeBasesButtonClick() {
   const knowledgeBases = await getKnowledgeBases();
@@ -62,10 +83,12 @@ async function handleKnowledgeBaseSelection(event) {
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
+  const updateConfigurationBtn = document.getElementById('updateConfigurationBtn');
   const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
 
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
   saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
+  updateConfigurationBtn.addEventListener('click', handleUpdateConfigurationButtonClick);
   document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
   knowledgeBasesTableBody.addEventListener('change', async (event) => {
     if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
