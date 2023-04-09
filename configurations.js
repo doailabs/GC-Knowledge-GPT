@@ -48,17 +48,16 @@ function displayConfiguration(knowledgeBaseId) {
         // Si se encuentra la fila, mostrar la sección Existing configuration y llenar los campos
         existingConfigurationSection.style.display = 'block';
         newConfigurationSection.style.display = 'none';
-
-        document.getElementById('knowledgeBaseIdExisting').value = rowData.knowledge_base_id;
-        document.getElementById('language').value = rowData.language;
-        document.getElementById('minAnswerConfidence').value = rowData.min_answer_confidence;
-        document.getElementById('systemPrompt').value = rowData.system_prompt;
-        document.getElementById('noMatchBehavior').value = rowData.no_match_behavior;
-        document.getElementById('createKnowledgeArticles').checked = rowData.create_knowledge_articles;
-        document.getElementById('wrapUpIds').value = rowData.wrap_up_ids;
-        document.getElementById('model').value = rowData.model;
-        document.getElementById('temperature').value = rowData.temperature;
-        document.getElementById('maxTokens').value = rowData.max_tokens;
+        document.getElementById('knowledgeBaseIdExisting').value = rowData.key;
+        document.getElementById('language').value = rowData.Language;
+        document.getElementById('minAnswerConfidence').value = rowData.Minimum Answer Confidence;
+        document.getElementById('systemPrompt').value = rowData.System Prompt;
+        document.getElementById('noMatchBehavior').value = rowData.No Match Behavior;
+        document.getElementById('createKnowledgeArticles').checked = rowData.Create knowledge articles based on wrap ups;
+        document.getElementById('wrapUpIds').value = rowData.Wrap up ids for knowledge articles;
+        document.getElementById('model').value = rowData.Model;
+        document.getElementById('temperature').value = rowData.Temperature;
+        document.getElementById('maxTokens').value = rowData.MaxTokens;
       } else {
         // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
         existingConfigurationSection.style.display = 'none';
