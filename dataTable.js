@@ -46,7 +46,7 @@ async function updateConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
   };
   
   try {
-    await updateRow(dataTableId, newRow);
+    await updateRow(dataTableId, newRow, knowledgeBaseId);
     return true;
   } catch (error) {
     console.error('Error al llamar a updateRow desde updateConfigurationRow: ', error);
