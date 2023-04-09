@@ -160,29 +160,13 @@ async function createRow(dataTableId, rowData) {
   }
 }
 
-async function updateRow(dataTableId, rowData) {
+async function updateRow(dataTableId, rowData, rowId) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
-    console.log('Row inserted successfully');
-    return true;
-  } catch (error) {
-    console.error('Error al insertar la fila en la DataTable: ', error);
-    return false;
-  }
-}
-
-async function updateConfiguration(datatableId, rowId, config) {
-  try {
-    const architectApi = new platformClient.ArchitectApi();
-    const response = await architectApi.putFlowsDatatableRow(datatableId, rowId, config);
+    const response = await architectApi.putFlowsDatatableRow(datatableId, rowId, rowData);
     return response;
   } catch (error) {
     console.error('Error updating configuration:', error);
   }
 }
-
-
-
-
