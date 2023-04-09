@@ -38,11 +38,10 @@ function displayConfiguration(knowledgeBaseId) {
   const newConfigurationSection = document.getElementById('newConfiguration');
   
   // Buscar la tabla "Open AI - Knowledge Integration"
-  getClientAppByName('Open AI - Knowledge Integration')
-    .then((clientApp) => {
+  findDataTable()
+    .then((dataTableId) => {
       // Si se encuentra la tabla, buscar la fila correspondiente
-      const knowledgeBaseIdField = `key_value_data/knowledge_base_id/${knowledgeBaseId}`;
-      return getClientAppData(clientApp.id, knowledgeBaseIdField);
+      return findDatatableRow(dataTableId, knowledgeBaseId);
     })
     .then((rowData) => {
       if (rowData) {
@@ -51,15 +50,7 @@ function displayConfiguration(knowledgeBaseId) {
         newConfigurationSection.style.display = 'none';
 
         document.getElementById('knowledgeBaseIdExisting').value = rowData.key_value_data.knowledge_base_id;
-        document.getElementById('language').value = rowData.key_value_data.language;
-        document.getElementById('minAnswerConfidence').value = rowData.key_value_data.min_answer_confidence;
-        document.getElementById('systemPrompt').value = rowData.key_value_data.system_prompt;
-        document.getElementById('noMatchBehavior').value = rowData.key_value_data.no_match_behavior;
-        document.getElementById('createKnowledgeArticles').checked = rowData.key_value_data.create_knowledge_articles;
-        document.getElementById('wrapUpIds').value = rowData.key_value_data.wrap_up_ids;
-        document.getElementById('model').value = rowData.key_value_data.model;
-        document.getElementById('temperature').value = rowData.key_value_data.temperature;
-        document.getElementById('maxTokens').value = rowData.key_value_data.max_tokens;
+        // ... (resto del código)
       } else {
         // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
         existingConfigurationSection.style.display = 'none';
@@ -72,4 +63,5 @@ function displayConfiguration(knowledgeBaseId) {
       console.error(error);
     });
 }
+
 
