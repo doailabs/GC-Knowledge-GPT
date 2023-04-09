@@ -24,7 +24,7 @@ async function handleKnowledgeBaseSelection(event) {
 
 
 async function handleSaveConfigurationButtonClick() {
-  const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
+  const knowledgeBaseId = document.getElementById('knowledgeBaseIdNew').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
   const language = document.getElementById('language').value;
   const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
