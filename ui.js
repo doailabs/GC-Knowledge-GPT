@@ -10,30 +10,18 @@ async function handleKnowledgeBaseSelection(event) {
   const dataTableId = await findDataTable();
 
   if (dataTableId) {
-    // Buscar la fila con el campo clave (key) igual al knowledge base Id seleccionado por el usuario
-    const datatableRow = await findDatatableRow(dataTableId, selectedKnowledgeBaseId);
+    // Mostrar la configuración actual o la nueva según la existencia de la fila correspondiente en la datatable
+    displayConfiguration(selectedKnowledgeBaseId);
 
-    if (datatableRow) {
-      // Crear el subapartado "Current configuration"
-      displayCurrentConfiguration(datatableRow);
-
-      // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
-      if (document.getElementById('knowledgeBaseId') !== null) {
-        updateKnowledgeBaseId(selectedKnowledgeBaseId);
-      }
-    } else {
-      // Crear el subapartado "New configuration"
-      displayNewConfiguration();
-
-      // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
-      if (document.getElementById('knowledgeBaseId') !== null) {
-        updateKnowledgeBaseId(selectedKnowledgeBaseId);
-      }
+    // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
+    if (document.getElementById('knowledgeBaseId') !== null) {
+      updateKnowledgeBaseId(selectedKnowledgeBaseId);
     }
   } else {
     console.error('No se pudo encontrar la datatable "Open AI - Knowledge Integration"');
   }
 }
+
 
 async function handleSaveConfigurationButtonClick() {
   const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
