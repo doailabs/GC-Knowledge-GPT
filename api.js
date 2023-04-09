@@ -153,9 +153,10 @@ async function findDatatableRow(datatableId, knowledgeBaseId) {
 
     const response = await architectApi.getFlowsDatatableRows(datatableId, opts);
     const row = response.entities.find(row => row.key === knowledgeBaseId);
+    console.log(`Se ha encontrado un fila coincidente en findDatatableRow: `, row);
     return row;
   } catch (error) {
-    console.error(`Error finding datatable row with key '${knowledgeBaseId}':`, error);
+    console.error(`Error encontrando una fila en la tabla con la clave '${knowledgeBaseId}':`, error);
   }
 }
 
