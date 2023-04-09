@@ -21,8 +21,14 @@ async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
     "System Prompt": systemPrompt,
     "Wrap up ids for knowledge articles": wrapUpIds
   };
-
-  await createRow(dataTableId, newRow);
+  
+  try {
+    await createRow(dataTableId, newRow);
+    return true;
+  } catch (error) {
+    console.error('Error al llamar a createRow desde insertConfigurationRow: ', error);
+    return false;
+  }  
 }
 
 
