@@ -41,8 +41,52 @@
   <div id="existingConfiguration" style="display:none;">
     <h3>Existing configuration</h3>
     <form id="existingConfigurationForm">
-      <!-- Aquí se mostrarán los mismos campos que en New configuration -->
-    </form>
+    <label for="knowledgeBaseIdNew">Knowledge Base ID:</label>
+    <input type="text" id="knowledgeBaseIdNew" size="36"><br>
+
+    <label for="language">Language:</label>
+    <select name="language" id="language">
+      <option value="en-us" selected>English (US)</option>
+      <option value="es-es">Español (España)</option>
+    </select>
+    <br>
+
+    <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
+    <input type="text" id="minAnswerConfidence" value="0.85"><br>
+
+    <label for="systemPrompt">System Prompt:</label>
+    <input type="text" id="systemPrompt" value="Act as if you were the most expert agent in the customer care center of an airline company, and respond to customers on behalf of that company. Always build your responses guided by the best known answer, that will be provided to you. Provide empathetic, useful and short (maximum 1024 tokens) responses.  Don't include anything in the responses that isn't related to the airline company. Stick strictly to these rules."><br>
+    
+    <label for="noMatchBehavior">No Match Behavior:</label>
+    <select name="noMatchBehavior" id="noMatchBehavior">
+      <option value="routeToAgent" selected>Route to agent</option>
+      <option value="disconnect">Disconnect</option>
+    </select>
+    <br>
+
+    <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
+    <input type="checkbox" id="createKnowledgeArticles">
+
+    <label for="wrapUpIds">Wrap Up IDs:</label>
+    <input type="text" id="wrapUpIds"><br>
+    
+    <label for="model">Model:</label>
+    <select name="model" id="model">
+      <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+    </select>
+    <br>    
+
+    <label for="temperature">Temperature:</label>
+    <input type="text" id="temperature" value="0"><br>
+    
+    <label for="maxTokens">Max tokens:</label>
+    <select name="maxTokens" id="maxTokens">
+      <option value="512">512</option>
+      <option value="1024" selected>1024</option>
+      <option value="2048">2048</option>
+    </select>
+    <br>    
+  </form>
     <button id="updateConfigurationBtn" onclick="updateConfiguration()">Update configuration</button>
   </div>
   <!-- Subapartado New Configuration -->
