@@ -1,7 +1,8 @@
 async function getConfigurationDataTableId() {
-  const { dataTableId } = await findDataTable();
+  const dataTableId = await findDataTable();
   return dataTableId;
 }
+
 
 async function createConfigurationDataTable() {
   const dataTable = await createDataTable();
