@@ -49,7 +49,34 @@
   <div id="newConfiguration" style="display:none;">
     <h3>New configuration</h3>
     <form id="newConfigurationForm">
-      <!-- Aquí se mostrarán los mismos campos que en Existing configuration -->
+      <label for="knowledgeBaseIdNew">Knowledge Base ID:</label>
+      <input type="text" id="knowledgeBaseIdNew" size="36"><br>
+      
+      <label for="language">Language:</label>
+      <input type="text" id="language"><br>
+      
+      <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
+      <input type="text" id="minAnswerConfidence"><br>
+      
+      <label for="systemPrompt">System Prompt:</label>
+      <input type="text" id="systemPrompt"><br>
+      
+      <label for="noMatchBehavior">No Match Behavior:</label>
+      <input type="text" id="noMatchBehavior"><br>
+      
+      <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
+      <input type="checkbox" id="createKnowledgeArticles"><br>
+      
+      <label for="wrapUpIds">Wrap Up IDs:</label>
+      <input type="text" id="wrapUpIds"><br>
+      
+      <label for="model">Model:</label>
+      <input type="text" id="model"><
+      <label for="temperature">Temperature:</label>
+      <input type="text" id="temperature"><br>
+      
+      <label for="maxTokens">Max Tokens:</label>
+      <input type="text" id="maxTokens"><br>
     </form>
     <button id="saveConfigurationBtn" onclick="saveNewConfiguration()">Save configuration</button>
   </div>
@@ -66,23 +93,6 @@
       displayConfiguration(selectedKnowledgeBaseId);
     });
 
-    const existingConfigurationFields = document.createElement('div');
-    existingConfigurationFields.innerHTML = `
-      <!-- Copia la estructura de campos del formulario de configuración a ambos subapartados -->
-      ...
-      <input type="text" id="knowledgeBaseIdExisting" size="36">
-      ...
-    `;
-    const newConfigurationFields = document.createElement('div');
-    newConfigurationFields.innerHTML = `
-      <!-- Copia la estructura de campos del formulario de configuración a ambos subapartados -->
-      ...
-      <input type="text" id="knowledgeBaseIdNew" size="36">
-      ...
-    `;
-    document.getElementById('existingConfigurationForm').appendChild(existingConfigurationFields.cloneNode(true));
-    document.getElementById('newConfigurationForm').appendChild(newConfigurationFields.cloneNode(true));
   </script>
 </body>
 </html>
-
