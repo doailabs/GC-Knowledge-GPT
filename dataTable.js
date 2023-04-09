@@ -51,6 +51,7 @@ async function updateConfiguration(datatableId, rowId, config) {
 }
 
 function saveNewConfiguration() {
+  const architectApi = new platformClient.ArchitectApi();
   const newConfig = {
     knowledge_base_id: document.getElementById('knowledgeBaseIdNew').value,
     language: document.getElementById('language').value,
@@ -70,7 +71,7 @@ function saveNewConfiguration() {
         const row = {
           key_value_data: newConfig
         };
-        return genesysCloudClient.flows.postFlowsDatatableRows(dataTableId, row);
+        return architectApi.postFlowsDatatableRows(dataTableId, row);
       } else {
         throw new Error('Data table not found.');
       }
