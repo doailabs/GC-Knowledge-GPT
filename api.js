@@ -169,39 +169,34 @@ async function updateConfiguration(datatableId, rowId, config) {
   }
 }
 
-function saveNewConfiguration() {
+async function saveNewConfiguration() {
   const architectApi = new platformClient.ArchitectApi();
   const newConfig = {
-    knowledge_base_id: document.getElementById('knowledgeBaseIdNew').value,
-    language: document.getElementById('language').value,
-    min_answer_confidence: document.getElementById('minAnswerConfidence').value,
-    system_prompt: document.getElementById('systemPrompt').value,
-    no_match_behavior: document.getElementById('noMatchBehavior').value,
-    create_knowledge_articles: document.getElementById('createKnowledgeArticles').checked,
-    wrap_up_ids: document.getElementById('wrapUpIds').value,
-    model: document.getElementById('model').value,
-    temperature: document.getElementById('temperature').value,
-    max_tokens: document.getElementById('maxTokens').value
+    "key": document.getElementById('knowledgeBaseIdNew').value,
+    "Language": document.getElementById('language').value,
+    "Minimum Answer Confidence": parseFloat(document.getElementById('minAnswerConfidence').value),
+    "System Prompt": document.getElementById('systemPrompt').value,
+    "No Match Behavior": document.getElementById('noMatchBehavior').value,
+    "Create knowledge articles based on wrap ups": document.getElementById('createKnowledgeArticles').checked,
+    "Wrap up ids for knowledge articles": document.getElementById('wrapUpIds').value,
+    "Model": document.getElementById('model').value,
+    "Temperature": parseFloat(document.getElementById('temperature').value),
+    "MaxTokens": parseInt(document.getElementById('maxTokens').value, 10)
   };
 
-  findDataTable()
-    .then((dataTableId) => {
-      if (dataTableId) {
-        const row = {
-          key_value_data: newConfig
-        };
-        return architectApi.postFlowsDatatableRows(dataTableId, row);
-      } else {
-        throw new Error('Data table not found.');
-      }
-    })
-    .then((response) => {
-      console.log('New configuration saved:', response);
-    })
-    .catch((error) => {
-      console.error('Error saving new configuration:', error);
-    });
+  const dataTableId = await getConfigurationDataTableId();
+  
+  if (!dataTableId) {
+    const createdDataTable = await createConfigurationDataTable();
+    dataTableId = createdDataTable.id;
+  } else {
+    console.log('Se ha encontrado una data table con id: ' + dataTableId);
+  }
+
+  await insertConfigurationRow(dataTableId, newConfig);
+  console.log('New configuration saved.');
 }
+
 
 
 
