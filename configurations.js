@@ -50,14 +50,14 @@ function displayConfiguration(knowledgeBaseId) {
         newConfigurationSection.style.display = 'none';
         document.getElementById('knowledgeBaseIdExisting').value = rowData.key;
         document.getElementById('language').value = rowData.Language;
-        document.getElementById('minAnswerConfidence').value = rowData."Minimum Answer Confidence";
-        document.getElementById('systemPrompt').value = rowData."System Prompt";
-        document.getElementById('noMatchBehavior').value = rowData."No Match Behavior";
-        document.getElementById('createKnowledgeArticles').checked = rowData."Create knowledge articles based on wrap ups";
-        document.getElementById('wrapUpIds').value = rowData."Wrap up ids for knowledge articles";
+        document.getElementById('minAnswerConfidence').value = rowData['Minimum Answer Confidence'];
+        document.getElementById('systemPrompt').value = rowData['System Prompt'];
+        document.getElementById('noMatchBehavior').value = rowData['No Match Behavior'];
+        document.getElementById('createKnowledgeArticles').checked = rowData['Create knowledge articles based on wrap ups'];
+        document.getElementById('wrapUpIds').value = rowData['Wrap up ids for knowledge articles'];
         document.getElementById('model').value = rowData.Model;
         document.getElementById('temperature').value = rowData.Temperature;
-        document.getElementById('maxTokens').value = rowData.MaxTokens;
+        document.getElementById('maxTokens').value = rowData['Max Tokens'];
       } else {
         // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
         existingConfigurationSection.style.display = 'none';
