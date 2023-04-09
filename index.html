@@ -53,31 +53,46 @@
     <input type="text" id="knowledgeBaseIdNew" size="36"><br>
 
     <label for="language">Language:</label>
-    <input type="text" id="language" value="en-us"><br>
+    <select name="language" id="language">
+      <option value="en-us" selected>English (US)</option>
+      <option value="es-es">Español (España)</option>
+    </select>
+    <br>
 
     <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
     <input type="text" id="minAnswerConfidence" value="0.85"><br>
 
     <label for="systemPrompt">System Prompt:</label>
     <input type="text" id="systemPrompt" value="Act as if you were the most expert agent in the customer care center of an airline company, and respond to customers on behalf of that company. Always build your responses guided by the best known answer, that will be provided to you. Provide empathetic, useful and short (maximum 1024 tokens) responses.  Don't include anything in the responses that isn't related to the airline company. Stick strictly to these rules."><br>
-
+    
     <label for="noMatchBehavior">No Match Behavior:</label>
-    <input type="text" id="noMatchBehavior" value="routeToAgent"><br>
+    <select name="noMatchBehavior" id="noMatchBehavior">
+      <option value="routeToAgent" selected>Route to agent</option>
+    </select>
+    <br>
 
     <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
     <input type="checkbox" id="createKnowledgeArticles">
 
     <label for="wrapUpIds">Wrap Up IDs:</label>
     <input type="text" id="wrapUpIds"><br>
-
+    
     <label for="model">Model:</label>
-    <input type="text" id="model" value="gpt-3.5-turbo"><br>
+    <select name="model" id="model">
+      <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+    </select>
+    <br>    
 
     <label for="temperature">Temperature:</label>
     <input type="text" id="temperature" value="0"><br>
-
-    <label for="maxTokens">Max Tokens:</label>
-    <input type="text" id="maxTokens" value="1024"><br>
+    
+    <label for="maxTokens">Max tokens:</label>
+    <select name="maxTokens" id="maxTokens">
+      <option value="512">512</option>
+      <option value="1024" selected>1024</option>
+      <option value="2048">2048</option>
+    </select>
+    <br>    
   </form>
   <button id="saveConfigurationBtn">Save configuration</button>
 </div>
