@@ -28,6 +28,7 @@ function registerEventHandlers() {
   const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
 
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
+  saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
   document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
   knowledgeBasesTableBody.addEventListener('change', async (event) => {
     if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
