@@ -3,7 +3,6 @@ async function getConfigurationDataTableId() {
   return dataTableId;
 }
 
-
 async function createConfigurationDataTable() {
   const dataTable = await createDataTable();
   return dataTable.id;
