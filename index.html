@@ -46,40 +46,41 @@
     <button id="updateConfigurationBtn" onclick="updateConfiguration()">Update configuration</button>
   </div>
   <!-- Subapartado New Configuration -->
-  <div id="newConfiguration" style="display:none;">
-    <h3>New configuration</h3>
-    <form id="newConfigurationForm">
-      <label for="knowledgeBaseIdNew">Knowledge Base ID:</label>
-      <input type="text" id="knowledgeBaseIdNew" size="36"><br>
-      
-      <label for="language">Language:</label>
-      <input type="text" id="language"><br>
-      
-      <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
-      <input type="text" id="minAnswerConfidence"><br>
-      
-      <label for="systemPrompt">System Prompt:</label>
-      <input type="text" id="systemPrompt"><br>
-      
-      <label for="noMatchBehavior">No Match Behavior:</label>
-      <input type="text" id="noMatchBehavior"><br>
-      
-      <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
-      <input type="checkbox" id="createKnowledgeArticles"><br>
-      
-      <label for="wrapUpIds">Wrap Up IDs:</label>
-      <input type="text" id="wrapUpIds"><br>
-      
-      <label for="model">Model:</label>
-      <input type="text" id="model"><
-      <label for="temperature">Temperature:</label>
-      <input type="text" id="temperature"><br>
-      
-      <label for="maxTokens">Max Tokens:</label>
-      <input type="text" id="maxTokens"><br>
-    </form>
-    <button id="saveConfigurationBtn" onclick="saveNewConfiguration()">Save configuration</button>
-  </div>
+<div id="newConfiguration" style="display:none;">
+  <h3>New configuration</h3>
+  <form id="newConfigurationForm">
+    <label for="knowledgeBaseIdNew">Knowledge Base ID:</label>
+    <input type="text" id="knowledgeBaseIdNew" size="36"><br>
+
+    <label for="language">Language:</label>
+    <input type="text" id="language" value="en-us"><br>
+
+    <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
+    <input type="text" id="minAnswerConfidence" value="0.85"><br>
+
+    <label for="systemPrompt">System Prompt:</label>
+    <input type="text" id="systemPrompt"><br>
+
+    <label for="noMatchBehavior">No Match Behavior:</label>
+    <input type="text" id="noMatchBehavior" value="routeToAgent"><br>
+
+    <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
+    <input type="checkbox" id="createKnowledgeArticles" checked="false"><br>
+
+    <label for="wrapUpIds">Wrap Up IDs:</label>
+    <input type="text" id="wrapUpIds"><br>
+
+    <label for="model">Model:</label>
+    <input type="text" id="model" value="gpt-3.5-turbo"><br>
+
+    <label for="temperature">Temperature:</label>
+    <input type="text" id="temperature" value="0"><br>
+
+    <label for="maxTokens">Max Tokens:</label>
+    <input type="text" id="maxTokens" value="1024"><br>
+  </form>
+  <button id="saveConfigurationBtn" onclick="saveNewConfiguration()">Save configuration</button>
+</div>
   <script>
     
     const clientId = '479255ae-cf23-4c2e-9209-555370df882c';
