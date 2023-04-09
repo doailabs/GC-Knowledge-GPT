@@ -131,19 +131,6 @@ async function createDataTable() {
   }
 }
 
-async function createRow(dataTableId, rowData) {
-  const apiInstance = new platformClient.ArchitectApi();
-
-  try {
-    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
-    console.log('Row inserted successfully');
-    return true;
-  } catch (error) {
-    console.error('Error al insertar la fila en la DataTable: ', error);
-    return false;
-  }
-}
-
 async function findDatatableRow(datatableId, knowledgeBaseId) {
   try { 
     const architectApi = new platformClient.ArchitectApi();
@@ -157,6 +144,32 @@ async function findDatatableRow(datatableId, knowledgeBaseId) {
     return row;
   } catch (error) {
     console.error(`Error encontrando una fila en la tabla con la clave '${knowledgeBaseId}':`, error);
+  }
+}
+
+async function createRow(dataTableId, rowData) {
+  const apiInstance = new platformClient.ArchitectApi();
+
+  try {
+    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
+    console.log('Row inserted successfully');
+    return true;
+  } catch (error) {
+    console.error('Error al insertar la fila en la DataTable: ', error);
+    return false;
+  }
+}
+
+async function updateRow(dataTableId, rowData) {
+  const apiInstance = new platformClient.ArchitectApi();
+
+  try {
+    await apiInstance.postFlowsDatatableRows(dataTableId, rowData);
+    console.log('Row inserted successfully');
+    return true;
+  } catch (error) {
+    console.error('Error al insertar la fila en la DataTable: ', error);
+    return false;
   }
 }
 
