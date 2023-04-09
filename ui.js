@@ -22,50 +22,12 @@ async function handleKnowledgeBaseSelection(event) {
   }
 }
 
-
-async function handleSaveConfigurationButtonClick() {
-  const knowledgeBaseId = document.getElementById('knowledgeBaseIdNew').value;
-  const systemPrompt = document.getElementById('systemPrompt').value;
-  const language = document.getElementById('language').value;
-  const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
-  const noMatchBehavior = document.getElementById('noMatchBehavior').value;
-  const createKnowledgeArticles = document.getElementById('createKnowledgeArticles').checked;
-  const wrapUpIds = document.getElementById('wrapUpIds').value;
-  const model = document.getElementById('model').value;
-  const temperature = document.getElementById('temperature').value;
-  const maxTokens = document.getElementById('maxTokens').value;
-
-  // Compruebe si todos los campos están llenos
-  if (!knowledgeBaseId || !systemPrompt || !language || !minAnswerConfidence || !noMatchBehavior || !model || !temperature || !maxTokens) {
-    alert('Please fill in all the configuration fields.');
-    return;
-  }
-
-  let dataTableId = await getConfigurationDataTableId();
-  
-  if (!dataTableId) {
-    const createdDataTable = await createConfigurationDataTable();
-    dataTableId = createdDataTable.id;
-  } else {
-    console.log('Se ha encontrado una data table con id: ' + dataTableId);
-  }
-
-  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
-
-  if (rowInserted) {
-    alert('Configuration saved.');
-  } else {
-    alert('Error saving the configuration.');
-  }
-} 
-
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
   const knowledgeBasesTableBody = document.getElementById('knowledgeBasesTableBody');
 
   getKnowledgeBasesBtn.addEventListener('click', handleGetKnowledgeBasesButtonClick);
-  saveConfigurationBtn.addEventListener('click', handleSaveConfigurationButtonClick);
   document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
   knowledgeBasesTableBody.addEventListener('change', async (event) => {
     if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
