@@ -10,20 +10,21 @@ async function createConfigurationDataTable() {
 
 async function insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, minAnswerConfidence, noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, temperature, maxTokens) {
   const newRow = {
+    "Temperature": parseFloat(temperature),
+    "Minimum Answer Confidence": parseFloat(minAnswerConfidence),
+    "Create knowledge articles based on wrap ups": createKnowledgeArticles,
+    "Language": language,
+    "MaxTokens": parseInt(maxTokens, 10),
+    "Model": model,
+    "No Match Behavior": noMatchBehavior,
     "key": knowledgeBaseId,
     "System Prompt": systemPrompt,
-    "Language": language,
-    "Minimum Answer Confidence": parseFloat(minAnswerConfidence),
-    "No Match Behavior": noMatchBehavior,
-    "Create knowledge articles based on wrap ups": createKnowledgeArticles,
-    "Wrap up ids for knowledge articles": wrapUpIds,
-    "Model": model,
-    "Temperature": parseFloat(temperature),
-    "MaxTokens": parseInt(maxTokens, 10)
+    "Wrap up ids for knowledge articles": wrapUpIds
   };
 
   await createRow(dataTableId, newRow);
 }
+
 
 
 
