@@ -57,7 +57,7 @@ function displayConfiguration(knowledgeBaseId) {
         document.getElementById('wrapUpIds').value = rowData['Wrap up ids for knowledge articles'];
         document.getElementById('model').value = rowData.Model;
         document.getElementById('temperature').value = rowData.Temperature;
-        document.getElementById('maxTokens').value = rowData['Max Tokens'];
+        document.getElementById('maxTokens').value = rowData.MaxTokens;
       } else {
         // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
         existingConfigurationSection.style.display = 'none';
