@@ -41,7 +41,7 @@ function displayConfiguration(knowledgeBaseId) {
   findDataTable()
     .then((window.datatableId) => {
       // Si se encuentra la tabla, buscar la fila correspondiente
-      return findDatatableRow(window.datatableId, window.selectedKnowledgeBaseId);
+      return findDatatableRow(window.datatableId, knowledgeBaseId);
     })
     .then((rowData) => {
       if (rowData) {
@@ -63,7 +63,7 @@ function displayConfiguration(knowledgeBaseId) {
         existingConfigurationSection.style.display = 'none';
         newConfigurationSection.style.display = 'block';
 
-        document.getElementById('knowledgeBaseIdNew').value = window.selectedKnowledgeBaseId;
+        document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
       }
     })
     .catch((error) => {
