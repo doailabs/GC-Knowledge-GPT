@@ -42,8 +42,8 @@ function displayConfiguration(knowledgeBaseId) {
       await findDataTable();
     }
 
-    // Llama a findDatatableRow con el ID de la base de conocimientos y el ID de la datatable almacenado en window.datatableId.
-    return findDatatableRow(window.datatableId, knowledgeBaseId);
+    // Llama a findDatatableRow con el ID de la base de conocimientos
+    return findDatatableRow(knowledgeBaseId);
   };
 
   fetchDataAndDisplayConfiguration()
