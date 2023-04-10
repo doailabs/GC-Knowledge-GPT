@@ -46,7 +46,7 @@ async function updateConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt
   };
   
   try {
-    const dataTableId = getConfigurationDataTableId();
+    const dataTableId = await getConfigurationDataTableId();
     await updateRow(dataTableId, newRow, knowledgeBaseId);
     return true;
   } catch (error) {
