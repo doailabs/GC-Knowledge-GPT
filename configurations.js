@@ -36,12 +36,18 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
 function displayConfiguration(knowledgeBaseId) {
   const existingConfigurationSection = document.getElementById('existingConfiguration');
   const newConfigurationSection = document.getElementById('newConfiguration');
-  
-  findDataTable()
-    .then((datatableId) => {
-      // Si se encuentra la tabla, buscar la fila correspondiente
-      return findDatatableRow(datatableId, knowledgeBaseId);
-    })
+
+  const fetchDataAndDisplayConfiguration = async () => {
+    // Si window.datatableId es "", llama a la función findDataTable() para obtener el ID.
+    if (window.datatableId === "") {
+      await findDataTable();
+    }
+
+    // Llama a findDatatableRow con el ID de la base de conocimientos y el ID de la datatable almacenado en window.datatableId.
+    return findDatatableRow(window.datatableId, knowledgeBaseId);
+  };
+
+  fetchDataAndDisplayConfiguration()
     .then((rowData) => {
       if (rowData) {
         // Si se encuentra la fila, mostrar la sección Existing configuration y llenar los campos
@@ -68,6 +74,7 @@ function displayConfiguration(knowledgeBaseId) {
       console.error(error);
     });
 }
+
 
 
 
