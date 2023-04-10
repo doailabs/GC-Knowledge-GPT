@@ -16,13 +16,13 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  let dataTableId = await getConfigurationDataTableId();
+  await getConfigurationDataTableId();
 
-  if (!dataTableId) {
+  if (!window.dataTableId) {
     const createdDataTable = await createConfigurationDataTable();
     dataTableId = createdDataTable.id;
   } else {
-    console.log('Se ha encontrado una data table con id: ' + dataTableId);
+    console.log('Se ha encontrado una data table con id: ' + window.dataTableId);
   }
 
   const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
@@ -46,12 +46,12 @@ async function handleUpdateConfigurationButtonClick() {
   const temperature = document.getElementById('temperature').value;
   const maxTokens = document.getElementById('maxTokens').value;
   
-  let dataTableId = await getConfigurationDataTableId();
+  await getConfigurationDataTableId();
 
-  if (!dataTableId) {
+  if (!window.dataTableId) {
     console.log('Error al obtener dataTableId en handleUpdateConfigurationButtonClick');
   } else {
-    console.log('Se ha encontrado una data table con id: ' + dataTableId);
+    console.log('Se ha encontrado una data table con id: ' + window.dataTableId);
   }
 
   const rowUpdated = await updateConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
