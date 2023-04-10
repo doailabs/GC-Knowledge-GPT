@@ -52,7 +52,7 @@ function displayConfiguration(knowledgeBaseId) {
         // Si se encuentra la fila, mostrar la sección Existing configuration y llenar los campos
         existingConfigurationSection.style.display = 'block';
         newConfigurationSection.style.display = 'none';
-        const createKnowledgeArticles = ddocument.getElementById('createKnowledgeArticles');
+        const createKnowledgeArticles = document.getElementById('createKnowledgeArticles');
         document.getElementById('knowledgeBaseIdExisting').value = rowData.key;
         document.getElementById('language').value = rowData.Language;
         document.getElementById('minAnswerConfidence').value = rowData['Minimum Answer Confidence'];
