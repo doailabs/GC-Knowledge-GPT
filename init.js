@@ -6,6 +6,3 @@ function init() {
     registerToggleWrapUpIdsFieldHandler();
   });
 }
-
-// Llama a la función init
-init();
