@@ -167,6 +167,6 @@ async function updateRow(dataTableId, rowData, rowId) {
     const response = await apiInstance.putFlowsDatatableRow(datatableId, rowId, rowData);
     return response;
   } catch (error) {
-    console.error('Error updating configuration:', error);
+    console.error('Error al actualizar la fila de la DataTable::', error);
   }
 }
