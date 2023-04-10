@@ -1,4 +1,3 @@
-// Initialize
 function init(clientId) {
     startGCSDKs(clientId).then(() => {
       document.addEventListener('DOMContentLoaded', () => {
