@@ -68,22 +68,6 @@ async function handleGetKnowledgeBasesButtonClick() {
   createKnowledgeBasesTable(knowledgeBases);
 }
 
-async function handleKnowledgeBaseSelection(event) {
-  window.selectedKnowledgeBaseId = event.target.value;
-  console.log("datatableId en ui.js es: ", window.datatableId);
-  if (window.datatableId) {
-    // Mostrar la configuración actual o la nueva según la existencia de la fila correspondiente en la datatable
-    await displayConfiguration(window.selectedKnowledgeBaseId);
-
-    // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
-    if (document.getElementById('knowledgeBaseId') !== null) {
-      updateKnowledgeBaseId(window.selectedKnowledgeBaseId);
-    }
-  } else {
-    console.error('No se pudo encontrar la datatable "Open AI - Knowledge Integration"');
-  }
-}
-
 function registerEventHandlers() {
   const getKnowledgeBasesBtn = document.getElementById('getKnowledgeBasesBtn');
   const saveConfigurationBtn = document.getElementById('saveConfigurationBtn');
@@ -98,6 +82,11 @@ function registerEventHandlers() {
     if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
       window.selectedKnowledgeBaseId = event.target.value;
       await displayConfiguration(window.selectedKnowledgeBaseId);
+
+      // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
+      if (document.getElementById('knowledgeBaseId') !== null) {
+        updateKnowledgeBaseId(window.selectedKnowledgeBaseId);
+      }
     }
   });  
 }
