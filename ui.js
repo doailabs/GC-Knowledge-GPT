@@ -99,7 +99,7 @@ function registerEventHandlers() {
       window.selectedKnowledgeBaseId = event.target.value;
       await displayConfiguration(window.selectedKnowledgeBaseId);
     }
-  });
+  });  
 }
 
 function adjustInputSize(input, maxSize) {
