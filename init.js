@@ -1,8 +1,17 @@
 // Initialize
 function init() {
-  // Llama a registerEventHandlers cuando el DOM esté completamente cargado
-  document.addEventListener('DOMContentLoaded', () => {
-    registerEventHandlers();
-    registerToggleWrapUpIdsFieldHandler();
-  });
+    startGCSDKs(clientId).then(() => {
+      registerEventHandlers();
+    });
+
+    document.getElementById('knowledgeBasesTable').addEventListener('change', function (event) {
+      const selectedKnowledgeBaseId = event.target.value;
+      document.getElementById('knowledgeBaseIdNew').value = selectedKnowledgeBaseId;
+      displayConfiguration(selectedKnowledgeBaseId);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      registerEventHandlers();
+      registerToggleWrapUpIdsFieldHandler();
+    });
 }
