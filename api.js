@@ -22,8 +22,7 @@ async function findDataTable() {
       const data = await apiInstance.getFlowsDatatablesDivisionviews(opts);
 
       if (data && data.entities && data.entities.length > 0) {
-        const dataTableId = data.entities[0].id;
-        window.datatableId = dataTableId;
+        window.datatableId = data.entities[0].id;
         console.log('dataTableId encontrado: ' + window.dataTableId);
       } else {
         console.log('No se encontró la dataTable');
