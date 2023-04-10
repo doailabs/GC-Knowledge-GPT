@@ -154,16 +154,8 @@
   <script>
     
     const clientId = '479255ae-cf23-4c2e-9209-555370df882c';
-    startGCSDKs(clientId).then(() => {
-      registerEventHandlers();
-    });
-
-    document.getElementById('knowledgeBasesTable').addEventListener('change', function (event) {
-      const selectedKnowledgeBaseId = event.target.value;
-      document.getElementById('knowledgeBaseIdNew').value = selectedKnowledgeBaseId;
-      displayConfiguration(selectedKnowledgeBaseId);
-    });
-
+    init();
+    
   </script>
 </body>
 </html>
