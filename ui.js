@@ -70,9 +70,9 @@ async function handleGetKnowledgeBasesButtonClick() {
 
 async function handleKnowledgeBaseSelection(event) {
   window.selectedKnowledgeBaseId = event.target.value;
+  console.log("datatableId en ui.js es: ", window.datatableId);
   if (window.datatableId) {
     // Mostrar la configuración actual o la nueva según la existencia de la fila correspondiente en la datatable
-    console.log("datatableId en ui.js es: ", window.datatableId);
     displayConfiguration(window.selectedKnowledgeBaseId);
 
     // Comprueba si el elemento con el ID 'knowledgeBaseId' existe antes de llamar a 'updateKnowledgeBaseId'
