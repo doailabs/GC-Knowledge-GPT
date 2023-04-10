@@ -70,11 +70,7 @@ async function handleGetKnowledgeBasesButtonClick() {
 
 async function handleKnowledgeBaseSelection(event) {
   window.selectedKnowledgeBaseId = event.target.value;
-
-  // Buscar la datatable con nombre "Open AI - Knowledge Integration"
-  await findDataTable();
-
-  if (window.dataTableId) {
+  if (window.datatableId) {
     // Mostrar la configuración actual o la nueva según la existencia de la fila correspondiente en la datatable
     displayConfiguration(window.selectedKnowledgeBaseId);
 
