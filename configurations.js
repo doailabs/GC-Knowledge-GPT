@@ -59,7 +59,7 @@ function displayConfiguration(knowledgeBaseId) {
         document.getElementById('systemPrompt').value = rowData['System Prompt'];
         document.getElementById('noMatchBehavior').value = rowData['No Match Behavior'];
         createKnowledgeArticles.checked = rowData['Create knowledge articles based on wrap ups'];
-        createKnowledgeArticles ? document.getElementById('wrapUpIds').value : '';
+        createKnowledgeArticles.checked ? document.getElementById('wrapUpIds').value = rowData['Wrap up ids for knowledge articles'] : '';
         document.getElementById('model').value = rowData.Model;
         document.getElementById('temperature').value = rowData.Temperature;
         document.getElementById('maxTokens').value = rowData.MaxTokens;
@@ -74,6 +74,7 @@ function displayConfiguration(knowledgeBaseId) {
       console.error(error);
     });
 }
+
 
 
 
