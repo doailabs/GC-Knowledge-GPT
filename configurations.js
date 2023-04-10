@@ -36,8 +36,11 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
 function displayConfiguration(knowledgeBaseId) {
   const existingConfigurationSection = document.getElementById('existingConfiguration');
   const newConfigurationSection = document.getElementById('newConfiguration');
-  findDataTable();
-  return findDatatableRow(window.datatableId, knowledgeBaseId);
+  
+  findDataTable()
+    .then((datatableId) => {
+      // Si se encuentra la tabla, buscar la fila correspondiente
+      return findDatatableRow(datatableId, knowledgeBaseId);
     })
     .then((rowData) => {
       if (rowData) {
@@ -58,7 +61,6 @@ function displayConfiguration(knowledgeBaseId) {
         // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
         existingConfigurationSection.style.display = 'none';
         newConfigurationSection.style.display = 'block';
-
         document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
       }
     })
@@ -66,5 +68,6 @@ function displayConfiguration(knowledgeBaseId) {
       console.error(error);
     });
 }
+
 
 
