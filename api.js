@@ -164,7 +164,7 @@ async function updateRow(dataTableId, rowData, rowId) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    const response = await architectApi.putFlowsDatatableRow(datatableId, rowId, rowData);
+    const response = await apiInstance.putFlowsDatatableRow(datatableId, rowId, rowData);
     return response;
   } catch (error) {
     console.error('Error updating configuration:', error);
