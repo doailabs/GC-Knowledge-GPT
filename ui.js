@@ -41,7 +41,7 @@ async function handleUpdateConfigurationButtonClick() {
   const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
   const noMatchBehavior = document.getElementById('noMatchBehavior').value;
   const createKnowledgeArticles = document.getElementById('createKnowledgeArticles').checked;
-  const wrapUpIds = document.getElementById('wrapUpIds').value;
+  const wrapUpIds = createKnowledgeArticles ? document.getElementById('wrapUpIds').value : '';
   const model = document.getElementById('model').value;
   const temperature = document.getElementById('temperature').value;
   const maxTokens = document.getElementById('maxTokens').value;
@@ -61,8 +61,7 @@ async function handleUpdateConfigurationButtonClick() {
   } else {
     alert('Error updating the configuration.');
   }
-} 
-
+}
 
 async function handleGetKnowledgeBasesButtonClick() {
   const knowledgeBases = await getKnowledgeBases();
