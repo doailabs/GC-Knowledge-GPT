@@ -16,7 +16,6 @@ function createKnowledgeBasesTable(knowledgeBases) {
     radioInput.setAttribute('type', 'radio');
     radioInput.setAttribute('name', 'knowledgeBaseRadio');
     radioInput.setAttribute('value', knowledgeBase.id);
-    radioInput.addEventListener('change', handleKnowledgeBaseSelection);
 
     radioCell.appendChild(radioInput);
 
