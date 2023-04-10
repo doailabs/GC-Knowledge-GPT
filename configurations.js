@@ -36,12 +36,8 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
 function displayConfiguration(knowledgeBaseId) {
   const existingConfigurationSection = document.getElementById('existingConfiguration');
   const newConfigurationSection = document.getElementById('newConfiguration');
-  
-  // Buscar la tabla "Open AI - Knowledge Integration"
-  findDataTable()
-    .then((window.datatableId) => {
-      // Si se encuentra la tabla, buscar la fila correspondiente
-      return findDatatableRow(window.datatableId, knowledgeBaseId);
+  await findDataTable();
+  return findDatatableRow(window.datatableId, knowledgeBaseId);
     })
     .then((rowData) => {
       if (rowData) {
