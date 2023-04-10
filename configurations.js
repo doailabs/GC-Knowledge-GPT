@@ -39,9 +39,9 @@ function displayConfiguration(knowledgeBaseId) {
   
   // Buscar la tabla "Open AI - Knowledge Integration"
   findDataTable()
-    .then((dataTableId) => {
+    .then((window.datatableId) => {
       // Si se encuentra la tabla, buscar la fila correspondiente
-      return findDatatableRow(dataTableId, knowledgeBaseId);
+      return findDatatableRow(window.datatableId, window.selectedKnowledgeBaseId);
     })
     .then((rowData) => {
       if (rowData) {
@@ -63,7 +63,7 @@ function displayConfiguration(knowledgeBaseId) {
         existingConfigurationSection.style.display = 'none';
         newConfigurationSection.style.display = 'block';
 
-        document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
+        document.getElementById('knowledgeBaseIdNew').value = window.selectedKnowledgeBaseId;
       }
     })
     .catch((error) => {
