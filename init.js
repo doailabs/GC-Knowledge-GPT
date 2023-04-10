@@ -1,5 +1,5 @@
 // Initialize
-function init() {
+function init(clientId) {
     startGCSDKs(clientId).then(() => {
       document.addEventListener('DOMContentLoaded', () => {
           registerEventHandlers();
