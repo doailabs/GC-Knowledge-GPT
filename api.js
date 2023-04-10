@@ -128,14 +128,14 @@ async function createDataTable() {
   }
 }
 
-async function findDatatableRow(datatableId, knowledgeBaseId) {
+async function findDatatableRow(knowledgeBaseId) {
   try { 
     const architectApi = new platformClient.ArchitectApi();
     const opts = {
       'showbrief': false
     };
 
-    const response = await architectApi.getFlowsDatatableRows(datatableId, opts);
+    const response = await architectApi.getFlowsDatatableRows(window.datatableId, opts);
     const row = response.entities.find(row => row.key === knowledgeBaseId);
     console.log(`Se ha encontrado un fila coincidente en findDatatableRow: `, row);
     return row;
@@ -161,7 +161,7 @@ async function updateRow(dataTableId, rowData, rowId) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    const response = await apiInstance.putFlowsDatatableRow(datatableId, rowId, rowData);
+    const response = await apiInstance.putFlowsDatatableRow(window.datatableId, rowId, rowData);
     return response;
   } catch (error) {
     console.error('Error al actualizar la fila de la DataTable::', error);
