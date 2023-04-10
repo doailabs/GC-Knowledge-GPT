@@ -164,9 +164,13 @@ async function updateRow(dataTableId, rowData, rowId) {
   const apiInstance = new platformClient.ArchitectApi();
 
   try {
-    const response = await apiInstance.putFlowsDatatableRow(datatableId, rowId, rowData);
+    const opts = {
+      'body': rowData
+    };
+    const response = await apiInstance.putFlowsDatatableRow(dataTableId, rowId, opts);
     return response;
   } catch (error) {
-    console.error('Error al actualizar la fila de la DataTable::', error);
+    console.error('Error al actualizar la fila de la DataTable:', error);
   }
 }
+
