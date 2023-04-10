@@ -107,13 +107,16 @@ function adjustInputSize(input, maxSize) {
 }
 
 function toggleWrapUpIdsField() {
-  const createKnowledgeArticlesCheckbox = document.getElementById('createKnowledgeArticles');
-  const wrapUpIdsFieldWrapper = document.getElementById('wrapUpIdsFieldWrapper');
+  var createKnowledgeArticlesCheckbox = document.getElementById("createKnowledgeArticles");
+  var wrapUpIdsDivExisting = document.getElementById("wrapUpIdsDivExisting");
+  var wrapUpIdsDivNew = document.getElementById("wrapUpIdsDivNew");
 
   if (createKnowledgeArticlesCheckbox.checked) {
-    wrapUpIdsFieldWrapper.style.display = 'block';
+    wrapUpIdsDivExisting.style.display = "block";
+    wrapUpIdsDivNew.style.display = "block";
   } else {
-    wrapUpIdsFieldWrapper.style.display = 'none';
+    wrapUpIdsDivExisting.style.display = "none";
+    wrapUpIdsDivNew.style.display = "none";
   }
 }
 
