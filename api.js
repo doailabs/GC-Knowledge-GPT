@@ -23,7 +23,7 @@ async function findDataTable() {
 
       if (data && data.entities && data.entities.length > 0) {
         window.datatableId = data.entities[0].id;
-        console.log('dataTableId encontrado: ' + window.dataTableId);
+        console.log('datatableId encontrado: ' + window.datatableId);
       } else {
         console.log('No se encontró la dataTable');
       }
