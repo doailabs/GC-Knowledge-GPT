@@ -36,7 +36,7 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
 function displayConfiguration(knowledgeBaseId) {
   const existingConfigurationSection = document.getElementById('existingConfiguration');
   const newConfigurationSection = document.getElementById('newConfiguration');
-  await findDataTable();
+  findDataTable();
   return findDatatableRow(window.datatableId, knowledgeBaseId);
     })
     .then((rowData) => {
