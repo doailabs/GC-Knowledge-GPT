@@ -137,7 +137,9 @@ async function findDatatableRow(knowledgeBaseId) {
     const opts = {
       'showbrief': false
     };
-
+    
+    console.log(`el valor de datatableId dentro de findDatatableRow es: `, window.datatableId);
+    console.log(`el valor de knowledgeBaseId dentro de findDatatableRow es: `, knowledgeBaseId);
     const response = await architectApi.getFlowsDatatableRows(window.datatableId, opts);
     const row = response.entities.find(row => row.key === knowledgeBaseId);
     console.log(`Se ha encontrado un fila coincidente en findDatatableRow: `, row);
