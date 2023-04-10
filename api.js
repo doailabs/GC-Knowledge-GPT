@@ -24,15 +24,13 @@ async function findDataTable() {
       if (data && data.entities && data.entities.length > 0) {
         const dataTableId = data.entities[0].id;
         console.log('dataTableId encontrado: ' + dataTableId);
-        return dataTableId;
+        window.datatableId = dataTableId;
       } else {
         console.log('No se encontró la dataTable');
-        return null;
       }
   } catch (err) {
       console.log("There was a failure calling findDataTable");
       console.error(err);
-      return null;
   }
 }
 
