@@ -18,14 +18,14 @@ async function handleSaveConfigurationButtonClick() {
 
   await getConfigurationDataTableId();
 
-  if (!window.dataTableId) {
+  if (!window.datatableId) {
     const createdDataTable = await createConfigurationDataTable();
-    dataTableId = createdDataTable.id;
+    window.datatableId = createdDataTable.id;
   } else {
-    console.log('Se ha encontrado una data table con id: ' + window.dataTableId);
+    console.log('Se ha encontrado una data table con id: ' + window.datatableId);
   }
 
-  const rowInserted = await insertConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
+  const rowInserted = await insertConfigurationRow(window.datatableId, window.selectedKnowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
 
   if (rowInserted) {
     alert('Configuration saved.');
@@ -48,13 +48,13 @@ async function handleUpdateConfigurationButtonClick() {
   
   await getConfigurationDataTableId();
 
-  if (!window.dataTableId) {
+  if (!window.datatableId) {
     console.log('Error al obtener dataTableId en handleUpdateConfigurationButtonClick');
   } else {
-    console.log('Se ha encontrado una data table con id: ' + window.dataTableId);
+    console.log('Se ha encontrado una data table con id: ' + window.datatableId);
   }
 
-  const rowUpdated = await updateConfigurationRow(dataTableId, knowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
+  const rowUpdated = await updateConfigurationRow(window.datatableId, window.selectedKnowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
 
   if (rowUpdated) {
     alert('Configuration updated.');
@@ -99,8 +99,8 @@ function registerEventHandlers() {
   document.getElementById('getKnowledgeBasesBtn').addEventListener('click', getKnowledgeBases);
   knowledgeBasesTableBody.addEventListener('change', async (event) => {
     if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
-      const knowledgeBaseId = event.target.value;
-      await displayConfiguration(knowledgeBaseId);
+      window.selectedKnowledgeBaseId = event.target.value;
+      await displayConfiguration(window.selectedKnowledgeBaseId);
     }
   });
 }
