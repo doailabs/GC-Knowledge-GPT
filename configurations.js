@@ -68,10 +68,6 @@ function updateInputFields(rowData) {
   maxTokensInput.value = rowData.MaxTokens || '';
 }
 
-function showConfigurationSection() {
-  document.getElementById('configuration').style.display = 'block';
-}
-
 function displayConfiguration(knowledgeBaseId) {
   const configurationSection = document.getElementById('configuration');
   const fetchDataAndDisplayConfiguration = async () => {
