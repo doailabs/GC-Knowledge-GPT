@@ -24,7 +24,7 @@ async function handleSaveConfigurationButtonClick() {
     console.log('Se ha encontrado una data table con id: ' + window.datatableId);
   }
 
-  const rowInserted = await insertConfigurationRow(window.datatableId, window.selectedKnowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
+  const rowInserted = await insertConfigurationRow(window.selectedKnowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
 
   if (rowInserted) {
     alert('Configuration saved.');
