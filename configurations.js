@@ -1,5 +1,3 @@
-
-// Table Management
 function createKnowledgeBasesTable(knowledgeBases) {
   const tableBody = document.getElementById('knowledgeBasesTableBody');
 
