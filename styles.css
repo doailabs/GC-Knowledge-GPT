@@ -137,3 +137,14 @@ button:hover {
   background-color: #111;
   transform: scale(1.05);
 }
+
+#title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
