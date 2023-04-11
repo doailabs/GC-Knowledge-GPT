@@ -68,29 +68,38 @@ function updateInputFields(rowData) {
   maxTokensInput.value = rowData.MaxTokens || '';
 }
 
-function displayConfiguration(knowledgeBaseId) {
-  const fetchDataAndDisplayConfiguration = async () => {
-    // Si window.datatableId es "", llama a la función findDataTable() para obtener el ID.
-    if (window.datatableId === "") {
-      await findDataTable();
-    }
+function showConfigurationSection() {
+  document.getElementById('configuration').style.display = 'block';
+}
 
-    // Llama a findDatatableRow con el ID de la base de conocimientos
-    return findDatatableRow(knowledgeBaseId);
-  };
+async function displayConfiguration(knowledgeBaseId) {
+  const row = await findDatatableRow(knowledgeBaseId);
+  
+  // Configuración encontrada
+  if (row) {
+    document.getElementById('knowledgeBaseIdNew').value = row.key;
+    document.getElementById('systemPrompt').value = row.properties['System Prompt'];
+    document.getElementById('language').value = row.properties['Language'];
+    document.getElementById('minAnswerConfidence').value = row.properties['Minimum Answer Confidence'];
+    document.getElementById('noMatchBehavior').value = row.properties['No Match Behavior'];
+    document.getElementById('createKnowledgeArticles').checked = row.properties['Create knowledge articles based on wrap ups'];
+    document.getElementById('wrapUpIds').value = row.properties['Wrap-up IDs'];
+    document.getElementById('model').value = row.properties['Model'];
+    document.getElementById('temperature').value = row.properties['Temperature'];
+    document.getElementById('maxTokens').value = row.properties['MaxTokens'];
 
-  fetchDataAndDisplayConfiguration()
-    .then((rowData) => {
-      if (rowData) {
-        updateInputFields(rowData);
-      } else {
-        const newConfiguration = {
-          key: knowledgeBaseId,
-        };
-        updateInputFields(newConfiguration);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    // Muestra el apartado de "Configuration"
+    showConfigurationSection();
+
+    document.getElementById('updateConfigurationBtn').style.display = 'block';
+    document.getElementById('saveConfigurationBtn').style.display = 'none';
+  } else {
+    document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
+
+    // Muestra el apartado de "Configuration"
+    showConfigurationSection();
+
+    document.getElementById('updateConfigurationBtn').style.display = 'none';
+    document.getElementById('saveConfigurationBtn').style.display = 'block';
+  }
 }
