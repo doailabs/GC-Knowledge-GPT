@@ -1,193 +1,130 @@
-/* Paleta de colores */
-:root {
-  --main-color: #3498db;
-  --background-color: #f8f8f8;
-  --text-color: #333;
-  --interactive-color: #f1c40f;
-  --highlight-color: #ecf0f1;
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Efectos 3D */
-.threed {
-  transform-style: preserve-3d;
-  transition: all 0.5s;
-}
-
-.threed:hover {
-  transform: rotateX(10deg) rotateY(10deg);
-}
-
-/* Estilos */
+/* Reset básico de navegador */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-  font-family: 'Helvetica', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.5;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
-body > * {
-  margin-bottom: 1.5rem;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+/* Cabecera */
+header {
+  background-color: #333;
+  color: #fff;
   text-align: center;
-  padding: 2rem 0;
-  background-color: var(--main-color);
+  padding: 1.2rem;
+}
+
+header a {
   color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
-button {
-  display: block;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  margin: 1rem auto;
-  background-color: var(--main-color);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  animation: fadeIn 1s ease;
-  perspective: 1000px;
+header a:hover {
+  text-decoration: underline;
 }
 
-button:hover {
-  background-color: #2980b9;
-  transform: translateY(-3px);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-.threed {
-  display: inline-block;
-  position: relative;
-}
-
-.threed:hover .back {
-  transform: rotateY(0deg);
-}
-
-.threed:hover .front {
-  transform: rotateY(-180deg);
-}
-
-.threed .back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-}
-
-.threed .front {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-table {
-  width: 80%;
-  margin: 2rem auto;
-  border-collapse: collapse;
-  perspective: 1000px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-table thead {
-  background-color: var(--main-color);
-  color: #fff;
-}
-
-table th,
-table td {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  text-align: left;
-  font-size: 1rem;
-}
-
-table tbody tr:nth-child(odd) {
-  background-color: var(--highlight-color);
-}
-
-table tbody tr:hover {
-  background-color: #ddd;
-  transform: translateY(-3px);
-  box-shadow: 0 3px
-  5px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos para los campos de texto, desplegables y casillas */
-.form-container {
+/* Navegación */
+nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 80%;
-  margin: 1rem auto;
+  justify-content: space-between;
+  background-color: #444;
+  padding: 0.75rem;
 }
 
-.form-container > div {
-  flex: 1;
-  padding: 0.5rem;
+nav ul {
+  display: flex;
 }
 
-label {
+nav ul li {
+  list-style-type: none;
+}
+
+nav ul li a {
   display: block;
-  margin-bottom: 0.25rem;
-  font-size: 1rem;
+  padding: 0 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 
+nav ul li a:hover {
+  background-color: #555;
+}
+
+/* Secciones */
+section {
+  background-color: #fff;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+/* Campos de texto y desplegables */
 input[type="text"],
 select {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: auto;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 3px;
   background-color: #fff;
   margin-bottom: 1rem;
+  min-width: 150px;
 }
 
-input[type="checkbox"] {
-  display: inline-block;
-  width: auto;
-  margin-right: 0.5rem;
-  font-size: 1rem;
-  vertical-align: middle;
-}
-
-.checkbox-label {
-  display: inline;
-  font-size: 1rem;
-  vertical-align: middle;
-}
-
-@media screen and (max-width: 768px) {
+/* Tabla de knowledge bases */
 table {
   width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+/* Botones */
+button {
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: #444;
 }
