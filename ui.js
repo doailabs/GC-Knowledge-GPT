@@ -16,8 +16,6 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  await getConfigurationDataTableId();
-
   if (!window.datatableId) {
     const createdDataTable = await createConfigurationDataTable();
     window.datatableId = createdDataTable.id;
