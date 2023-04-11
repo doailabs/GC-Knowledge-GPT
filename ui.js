@@ -16,8 +16,13 @@ async function handleSaveConfigurationButtonClick() {
     return;
   }
 
-  // Utiliza ensureDataTableExists() en lugar de createConfigurationDataTable()
   await ensureDataTableExists();
+
+  if (!window.datatableId) {
+    console.log('Error al obtener dataTableId en handleSaveConfigurationButtonClick');
+  } else {
+    console.log('Se ha encontrado una data table con id: ' + window.datatableId);
+  }
 
   const rowInserted = await insertConfigurationRow(window.datatableId, window.selectedKnowledgeBaseId, systemPrompt, language, parseFloat(minAnswerConfidence), noMatchBehavior, createKnowledgeArticles, wrapUpIds, model, parseFloat(temperature), parseInt(maxTokens, 10));
 
@@ -27,7 +32,6 @@ async function handleSaveConfigurationButtonClick() {
     alert('Error saving the configuration.');
   }
 }
-
 
 async function handleUpdateConfigurationButtonClick() {
   const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
