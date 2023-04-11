@@ -98,15 +98,12 @@ function adjustInputSize(input, maxSize) {
 
 function toggleWrapUpIdsField() {
   var createKnowledgeArticlesCheckbox = document.getElementById("createKnowledgeArticles");
-  var wrapUpIdsDivExisting = document.getElementById("wrapUpIdsDivExisting");
-  var wrapUpIdsDivNew = document.getElementById("wrapUpIdsDivNew");
+  var wrapUpIdsDiv = document.getElementById("wrapUpIdsDiv");
 
   if (createKnowledgeArticlesCheckbox.checked) {
-    wrapUpIdsDivExisting.style.display = "block";
-    wrapUpIdsDivNew.style.display = "block";
+    wrapUpIdsDiv.style.display = "block";
   } else {
-    wrapUpIdsDivExisting.style.display = "none";
-    wrapUpIdsDivNew.style.display = "none";
+    wrapUpIdsDiv.style.display = "none";
   }
 }
 
