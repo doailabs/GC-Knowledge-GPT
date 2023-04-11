@@ -1,7 +1,14 @@
 async function ensureDataTableExists() {
-  if (!window.datatableId) {
-    const createdDataTable = await createConfigurationDataTable();
-    window.datatableId = createdDataTable.id;
+  const existingDataTableId = await findDataTable();
+  if (existingDataTableId) {
+    window.datatableId = existingDataTableId;
+  } else {
+    const newDataTable = await createDataTable();
+    if (newDataTable && newDataTable.id) {
+      window.datatableId = newDataTable.id;
+    } else {
+      console.error("Error creating the DataTable.");
+    }
   }
 }
 
