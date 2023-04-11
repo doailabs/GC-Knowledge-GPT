@@ -44,10 +44,31 @@ function updateKnowledgeBaseId(knowledgeBaseId) {
   knowledgeBaseIdInput.value = knowledgeBaseId;
 }
 
-function displayConfiguration(knowledgeBaseId) {
-  const existingConfigurationSection = document.getElementById('existingConfiguration');
-  const newConfigurationSection = document.getElementById('newConfiguration');
+function updateInputFields(rowData) {
+  const knowledgeBaseIdInput = document.getElementById('knowledgeBaseId');
+  const languageInput = document.getElementById('language');
+  const minAnswerConfidenceInput = document.getElementById('minAnswerConfidence');
+  const systemPromptInput = document.getElementById('systemPrompt');
+  const noMatchBehaviorInput = document.getElementById('noMatchBehavior');
+  const createKnowledgeArticlesInput = document.getElementById('createKnowledgeArticles');
+  const wrapUpIdsInput = document.getElementById('wrapUpIds');
+  const modelInput = document.getElementById('model');
+  const temperatureInput = document.getElementById('temperature');
+  const maxTokensInput = document.getElementById('maxTokens');
 
+  knowledgeBaseIdInput.value = rowData.key || '';
+  languageInput.value = rowData.Language || '';
+  minAnswerConfidenceInput.value = rowData['Minimum Answer Confidence'] || '';
+  systemPromptInput.value = rowData['System Prompt'] || '';
+  noMatchBehaviorInput.value = rowData['No Match Behavior'] || '';
+  createKnowledgeArticlesInput.checked = rowData['Create knowledge articles based on wrap ups'] || false;
+  wrapUpIdsInput.value = rowData['Wrap up ids for knowledge articles'] || '';
+  modelInput.value = rowData.Model || '';
+  temperatureInput.value = rowData.Temperature || '';
+  maxTokensInput.value = rowData.MaxTokens || '';
+}
+
+function displayConfiguration(knowledgeBaseId) {
   const fetchDataAndDisplayConfiguration = async () => {
     // Si window.datatableId es "", llama a la función findDataTable() para obtener el ID.
     if (window.datatableId === "") {
@@ -61,33 +82,15 @@ function displayConfiguration(knowledgeBaseId) {
   fetchDataAndDisplayConfiguration()
     .then((rowData) => {
       if (rowData) {
-        // Si se encuentra la fila, mostrar la sección Existing configuration y llenar los campos
-        existingConfigurationSection.style.display = 'block';
-        newConfigurationSection.style.display = 'none';
-        const createKnowledgeArticles = document.getElementById('createKnowledgeArticles');
-        document.getElementById('knowledgeBaseIdExisting').value = rowData.key;
-        document.getElementById('language').value = rowData.Language;
-        document.getElementById('minAnswerConfidence').value = rowData['Minimum Answer Confidence'];
-        document.getElementById('systemPrompt').value = rowData['System Prompt'];
-        document.getElementById('noMatchBehavior').value = rowData['No Match Behavior'];
-        createKnowledgeArticles.checked = rowData['Create knowledge articles based on wrap ups'];
-        createKnowledgeArticles.checked ? document.getElementById('wrapUpIds').value = rowData['Wrap up ids for knowledge articles'] : '';
-        document.getElementById('model').value = rowData.Model;
-        document.getElementById('temperature').value = rowData.Temperature;
-        document.getElementById('maxTokens').value = rowData.MaxTokens;
+        updateInputFields(rowData);
       } else {
-        // Si no se encuentra la fila, mostrar la sección New configuration y llenar el campo Knowledge Base Id
-        existingConfigurationSection.style.display = 'none';
-        newConfigurationSection.style.display = 'block';
-        document.getElementById('knowledgeBaseIdNew').value = knowledgeBaseId;
+        const newConfiguration = {
+          key: knowledgeBaseId,
+        };
+        updateInputFields(newConfiguration);
       }
     })
     .catch((error) => {
       console.error(error);
     });
 }
-
-
-
-
-
