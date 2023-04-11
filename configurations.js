@@ -1,27 +1,41 @@
 function createKnowledgeBasesTable(knowledgeBases) {
   const tableBody = document.getElementById('knowledgeBasesTableBody');
 
+  function idExists(id) {
+    const rows = tableBody.getElementsByTagName('tr');
+    for (let i = 0; i < rows.length; i++) {
+      const currentRow = rows[i];
+      const currentId = currentRow.getElementsByTagName('td')[0].textContent;
+      if (currentId === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   knowledgeBases.forEach((knowledgeBase) => {
-    const row = document.createElement('tr');
-    const idCell = document.createElement('td');
-    const nameCell = document.createElement('td');
-    const radioCell = document.createElement('td');
-    const radioInput = document.createElement('input');
+    if (!idExists(knowledgeBase.id)) {
+      const row = document.createElement('tr');
+      const idCell = document.createElement('td');
+      const nameCell = document.createElement('td');
+      const radioCell = document.createElement('td');
+      const radioInput = document.createElement('input');
 
-    idCell.textContent = knowledgeBase.id;
-    nameCell.textContent = knowledgeBase.name;
+      idCell.textContent = knowledgeBase.id;
+      nameCell.textContent = knowledgeBase.name;
 
-    radioInput.setAttribute('type', 'radio');
-    radioInput.setAttribute('name', 'knowledgeBaseRadio');
-    radioInput.setAttribute('value', knowledgeBase.id);
+      radioInput.setAttribute('type', 'radio');
+      radioInput.setAttribute('name', 'knowledgeBaseRadio');
+      radioInput.setAttribute('value', knowledgeBase.id);
 
-    radioCell.appendChild(radioInput);
+      radioCell.appendChild(radioInput);
 
-    row.appendChild(idCell);
-    row.appendChild(nameCell);
-    row.appendChild(radioCell);
+      row.appendChild(idCell);
+      row.appendChild(nameCell);
+      row.appendChild(radioCell);
 
-    tableBody.appendChild(row);
+      tableBody.appendChild(row);
+    }
   });
 }
 
