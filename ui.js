@@ -1,5 +1,5 @@
 async function handleSaveConfigurationButtonClick() {
-  const knowledgeBaseId = document.getElementById('knowledgeBaseIdNew').value;
+  const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
   const language = document.getElementById('language').value;
   const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
@@ -33,7 +33,7 @@ async function handleSaveConfigurationButtonClick() {
 } 
 
 async function handleUpdateConfigurationButtonClick() {
-  const knowledgeBaseId = document.getElementById('knowledgeBaseIdNew').value;
+  const knowledgeBaseId = document.getElementById('knowledgeBaseId').value;
   const systemPrompt = document.getElementById('systemPrompt').value;
   const language = document.getElementById('language').value;
   const minAnswerConfidence = document.getElementById('minAnswerConfidence').value;
