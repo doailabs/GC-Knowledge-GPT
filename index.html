@@ -7,7 +7,7 @@
   <title>Genesys Cloud & Open AI integration</title>
   <script src="https://sdk-cdn.mypurecloud.com/javascript/latest/purecloud-platform-client-v2.min.js"></script>
   <script src="https://sdk-cdn.mypurecloud.com/client-apps/2.6.3/purecloud-client-app-sdk-de77761d.min.js"></script>
-  <script src="globals.js"></script>  
+  <script src="globals.js"></script>
   <script src="startGCSDKs.js"></script>
   <script src="api.js"></script>
   <script src="dataTable.js"></script>
@@ -37,120 +37,63 @@
       </tbody>
     </table>
   </div>
-  <!-- Subapartado Existing Configuration -->
-  <div id="existingConfiguration" style="display:none;">
-    <h3>Existing configuration</h3>
-    <form id="existingConfigurationForm">
-    <label for="knowledgeBaseIdExisting">Knowledge Base ID:</label>
-    <input type="text" id="knowledgeBaseIdExisting" size="46"><br>
+  <!-- Subapartado Configuration -->
+  <div id="configuration" style="display:none;">
+    <h3>Configuration</h3>
+    <form id="configurationForm">
+      <label for="knowledgeBaseId">Knowledge Base ID:</label>
+      <input type="text" id="knowledgeBaseId" size="46" readonly><br>
 
-    <label for="language">Language:</label>
-    <select name="language" id="language">
-      <option value="en-us" selected>English (US)</option>
-      <option value="es-es">Español (España)</option>
-    </select>
-    <br>
-
-    <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
-    <input type="text" id="minAnswerConfidence" value="0.85"><br>
-
-    <label for="systemPrompt">System Prompt:</label>
-    <input type="text" id="systemPrompt" size="150" value="Act as if you were the most expert agent in the customer care center of an airline company, and respond to customers on behalf of that company. Always build your responses guided by the best known answer, that will be provided to you. Provide empathetic, useful and short (maximum 1024 tokens) responses.  Don't include anything in the responses that isn't related to the airline company. Stick strictly to these rules."><br>
-    
-    <label for="noMatchBehavior">No Match Behavior:</label>
-    <select name="noMatchBehavior" id="noMatchBehavior">
-      <option value="routeToAgent" selected>Route to agent</option>
-      <option value="disconnect">Disconnect</option>
-    </select>
-    <br>
-
-    <div style="display: block;">
-      <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
-      <input type="checkbox" id="createKnowledgeArticles">
-    </div>
-
-    <div id="wrapUpIdsDivExisting" style="display:none;">
-      <label for="wrapUpIdsExisting">Wrap-up IDs:</label>
-      <input type="text" id="wrapUpIdsExisting" name="wrapUpIdsExisting">
-    </div>
-      
-    <div style="display: block;">
-      <label for="model">Model:</label>
-      <select name="model" id="model">
-        <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+      <label for="language">Language:</label>
+      <select name="language" id="language">
+        <option value="en-us" selected>English (US)</option>
+        <option value="es-es">Español (España)</option>
       </select>
-    </div>
+      <br>
 
-    <label for="temperature">Temperature:</label>
-    <input type="text" id="temperature" value="0"><br>
-    
-    <label for="maxTokens">Max tokens:</label>
-    <select name="maxTokens" id="maxTokens">
-      <option value="512">512</option>
-      <option value="1024" selected>1024</option>
-      <option value="2048">2048</option>
-    </select>
-    <br>    
-  </form>
-    <button id="updateConfigurationBtn">Update configuration</button>
+      <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
+      <input type="text" id="minAnswerConfidence" value="0.85"><br>
+
+      <label for="systemPrompt">System Prompt:</label>
+      <input type="text" id="systemPrompt" size="150" value="Act as if you were the most expert agent in the customer care center of an airline company, and respond to customers on behalf of that company. Always build your responses guided by the best known answer, that will be provided to you. Provide empathetic, useful and short (maximum 1024 tokens) responses.  Don't include anything in the responses that isn't related to the airline company. Stick strictly to these rules."><br>
+
+      <label for="noMatchBehavior">No Match Behavior:</label>
+      <select name="noMatchBehavior" id="noMatchBehavior">
+        <option value="routeToAgent" selected>Route to agent</option>
+        <option value="disconnect">Disconnect</option>
+      </select>
+      <br>
+  <div style="display: block;">
+    <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
+    <input type="checkbox" id="createKnowledgeArticles">
   </div>
-  <!-- Subapartado New Configuration -->
-<div id="newConfiguration" style="display:none;">
-  <h3>New configuration</h3>
-  <form id="newConfigurationForm">
-    <label for="knowledgeBaseIdNew">Knowledge Base ID:</label>
-    <input type="text" id="knowledgeBaseIdNew" size="36"><br>
 
-    <label for="language">Language:</label>
-    <select name="language" id="language">
-      <option value="en-us" selected>English (US)</option>
-      <option value="es-es">Español (España)</option>
-    </select>
-    <br>
-
-    <label for="minAnswerConfidence">Minimum Answer Confidence:</label>
-    <input type="text" id="minAnswerConfidence" value="0.85"><br>
-
-    <label for="systemPrompt">System Prompt:</label>
-    <input type="text" id="systemPrompt" size="150" value="Act as if you were the most expert agent in the customer care center of an airline company, and respond to customers on behalf of that company. Always build your responses guided by the best known answer, that will be provided to you. Provide empathetic, useful and short (maximum 1024 tokens) responses.  Don't include anything in the responses that isn't related to the airline company. Stick strictly to these rules."><br>
+  <div id="wrapUpIdsDiv" style="display:none;">
+    <label for="wrapUpIds">Wrap-up IDs:</label>
+    <input type="text" id="wrapUpIds" name="wrapUpIds">
+  </div>
     
-    <label for="noMatchBehavior">No Match Behavior:</label>
-    <select name="noMatchBehavior" id="noMatchBehavior">
-      <option value="routeToAgent" selected>Route to agent</option>
-      <option value="disconnect">Disconnect</option>
+  <div style="display: block;">
+    <label for="model">Model:</label>
+    <select name="model" id="model">
+      <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
     </select>
-    <br>
+  </div>
 
-    <div style="display: block;">
-      <label for="createKnowledgeArticles">Create Knowledge Articles:</label>
-      <input type="checkbox" id="createKnowledgeArticles">
-    </div>
+  <label for="temperature">Temperature:</label>
+  <input type="text" id="temperature" value="0"><br>
 
-    <div id="wrapUpIdsDivNew" style="display:none;">
-      <label for="wrapUpIdsNew">Wrap-up IDs:</label>
-      <input type="text" id="wrapUpIdsNew" name="wrapUpIdsNew">
-    </div>
-      
-    <div style="display: block;">
-      <label for="model">Model:</label>
-      <select name="model" id="model">
-        <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
-      </select>
-    </div>
-
-    <label for="temperature">Temperature:</label>
-    <input type="text" id="temperature" value="0"><br>
-    
-    <label for="maxTokens">Max tokens:</label>
-    <select name="maxTokens" id="maxTokens">
-      <option value="512">512</option>
-      <option value="1024" selected>1024</option>
-      <option value="2048">2048</option>
-    </select>
-    <br>    
-  </form>
-  <button id="saveConfigurationBtn">Save configuration</button>
-</div>
+  <label for="maxTokens">Max tokens:</label>
+  <select name="maxTokens" id="maxTokens">
+    <option value="512">512</option>
+    <option value="1024" selected>1024</option>
+    <option value="2048">2048</option>
+  </select>
+  <br>    
+</form>
+<button id="saveConfigurationBtn">Save configuration</button>
+<button id="updateConfigurationBtn" style="display:none;">Update configuration</button>
+  </div>
   <script>
     const clientId = '479255ae-cf23-4c2e-9209-555370df882c';
 
@@ -161,4 +104,4 @@
     });
   </script>
 </body>
-</html>
+</html>      
